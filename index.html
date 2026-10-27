@@ -1,0 +1,361 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>কারিগরপাড়া ভূমি সেবা</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@600;800&display=swap">
+<style>
+/* Layout: survey-map hero with plot grid, online services cards, live land-unit converter, buying checklist, caution list, contact band */
+:root {
+  --bg: #f5f3ec;
+  --surface: #fffefa;
+  --fg: #1c2530;
+  --muted: #586270;
+  --ink: #1f3a4d;
+  --ink-2: #2f5b78;
+  --clay: #b5582f;
+  --clay-soft: #f4dccd;
+  --leaf: #4d7c3a;
+  --line: #dad6c8;
+  --on-ink: #eef3f6;
+  --font-display: "Noto Serif Bengali", "Kalpurush", serif;
+  --font-body: "Hind Siliguri", "Noto Sans Bengali", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1519; --surface: #161e24; --fg: #e6edf2; --muted: #9bacb8;
+    --ink: #0b1c28; --ink-2: #5d9bc0; --clay: #e08a5f; --clay-soft: #33231a; --leaf: #8cbf72;
+    --line: #26323b; --on-ink: #eef3f6; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1519; --surface: #161e24; --fg: #e6edf2; --muted: #9bacb8;
+  --ink: #0b1c28; --ink-2: #5d9bc0; --clay: #e08a5f; --clay-soft: #33231a; --leaf: #8cbf72;
+  --line: #26323b; --on-ink: #eef3f6; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 17px; line-height: 1.7; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--clay); outline-offset: 2px; }
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.4; margin: 0; text-wrap: balance; }
+p { margin: 0; }
+.wrap {
+  max-width: 1120px; margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.kicker { font-size: 0.85rem; letter-spacing: 0.08em; color: var(--clay); font-weight: 600; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--ink); }
+
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 9; background: var(--ink); color: var(--on-ink); }
+.bar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 10px; }
+.brand { font-family: var(--font-display); font-weight: 800; text-decoration: none; display: flex; align-items: center; gap: 10px; min-width: 0; }
+.nav { display: flex; gap: 2px; flex-wrap: wrap; justify-content: flex-end; }
+.nav a { text-decoration: none; padding: 6px 12px; border-radius: 6px; font-size: 0.95rem; }
+.nav a:hover { background: rgba(255,255,255,0.12); }
+@media (max-width: 760px) { .nav a:nth-child(n+4) { display: none; } }
+
+/* hero */
+.hero { background: var(--ink); color: var(--on-ink); position: relative; overflow: hidden; }
+.hero .wrap { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: center; padding-block: 60px; position: relative; }
+.hero .kicker { color: var(--clay-soft); }
+.hero h1 { font-size: clamp(2rem, 5.2vw, 3.4rem); font-weight: 800; margin-top: 10px; }
+.hero .lead { margin-top: 16px; max-width: 33em; color: color-mix(in srgb, var(--on-ink) 85%, transparent); font-size: 1.08rem; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+.btn { display: inline-block; text-decoration: none; padding: 11px 22px; border-radius: 8px; font-weight: 600; border: 2px solid transparent; cursor: pointer; font-family: inherit; font-size: 1rem; }
+.btn-clay { background: var(--clay); color: #fff; }
+:root[data-theme="dark"] .btn-clay { color: #1a0d05; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .btn-clay { color: #1a0d05; } }
+.btn-clay:hover { filter: brightness(1.1); }
+.btn-line { border-color: rgba(255,255,255,0.45); color: var(--on-ink); }
+.btn-line:hover { background: rgba(255,255,255,0.12); }
+.plotmap { width: 100%; height: auto; max-width: 440px; justify-self: center; color: var(--on-ink); }
+@media (max-width: 860px) { .hero .wrap { grid-template-columns: 1fr; } .plotmap { max-width: 360px; } }
+
+section { padding-block: 64px; }
+.sec-head { max-width: 42em; margin-bottom: 32px; }
+.sec-head h2 { font-size: clamp(1.6rem, 3.6vw, 2.2rem); margin-top: 6px; }
+.sec-head p { color: var(--muted); margin-top: 10px; }
+.alt { background: var(--surface); border-block: 1px solid var(--line); }
+
+/* services */
+.svcs { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 18px; }
+.svc { border: 1px solid var(--line); border-radius: 12px; padding: 22px; background: var(--surface); display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.svc h3 { font-size: 1.15rem; }
+.svc p { color: var(--muted); font-size: 0.95rem; }
+.svc .site { margin-top: auto; padding-top: 10px; font-weight: 600; color: var(--ink-2); text-decoration: none; word-break: break-all; }
+.svc .site:hover { text-decoration: underline; }
+.svc svg { color: var(--clay); }
+
+/* converter */
+.conv { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 32px; align-items: start; }
+.form { background: var(--bg); border: 1px solid var(--line); border-radius: 14px; padding: 22px; display: grid; gap: 14px; min-width: 0; }
+.form label { font-weight: 600; font-size: 0.95rem; display: block; margin-bottom: 4px; }
+.form input, .form select { width: 100%; font: inherit; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--fg); }
+.results { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; min-width: 0; }
+.res { border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; background: var(--bg); min-width: 0; }
+.res span { display: block; font-size: 0.85rem; color: var(--muted); }
+.res b { font-family: var(--font-display); font-size: 1.3rem; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.res.on { border-color: var(--clay); background: var(--clay-soft); }
+:root[data-theme="dark"] .res.on b { color: var(--fg); }
+.note { margin-top: 14px; font-size: 0.88rem; color: var(--muted); }
+@media (max-width: 860px) { .conv { grid-template-columns: 1fr; } }
+
+/* checklist */
+.checks { display: grid; grid-template-columns: 1fr 1fr; gap: 0 40px; border-top: 1px solid var(--line); margin: 0; padding: 0; list-style: none; }
+.checks li { padding: 16px 0; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 30px 1fr; gap: 12px; min-width: 0; }
+.checks input { width: 22px; height: 22px; margin-top: 5px; accent-color: var(--leaf); }
+.checks h3 { font-size: 1.05rem; }
+.checks p { color: var(--muted); font-size: 0.94rem; margin-top: 2px; }
+.progress { margin-bottom: 18px; color: var(--muted); font-size: 0.95rem; }
+.progress b { color: var(--fg); font-variant-numeric: tabular-nums; }
+@media (max-width: 760px) { .checks { grid-template-columns: 1fr; } }
+
+/* caution */
+.caution { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.warn { border: 1px solid var(--line); border-left: 5px solid var(--clay); border-radius: 10px; padding: 18px 20px; background: var(--bg); min-width: 0; }
+.warn h3 { font-size: 1.05rem; }
+.warn p { color: var(--muted); font-size: 0.94rem; margin-top: 4px; }
+
+/* band */
+.band { background: var(--ink); color: var(--on-ink); }
+.band .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+.band .kicker { color: var(--clay-soft); }
+.band h2 { font-size: clamp(1.5rem, 3.2vw, 2rem); margin-top: 6px; }
+.band p { color: color-mix(in srgb, var(--on-ink) 88%, transparent); margin-top: 10px; }
+.helpline { margin-top: 18px; border: 1px solid rgba(255,255,255,0.3); border-radius: 12px; padding: 18px 20px; display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; }
+.helpline b { font-family: var(--font-display); font-size: 2.2rem; color: #f0b48f; line-height: 1.2; font-variant-numeric: tabular-nums; }
+.helpline span { color: var(--clay-soft); font-size: 0.92rem; }
+.contact-list { margin: 18px 0 0; padding: 0; list-style: none; display: grid; gap: 12px; }
+.contact-list li { display: grid; grid-template-columns: 100px 1fr; gap: 12px; }
+.contact-list span { color: var(--clay-soft); font-size: 0.9rem; }
+@media (max-width: 860px) { .band .cols { grid-template-columns: 1fr; } }
+footer { background: var(--ink); color: color-mix(in srgb, var(--on-ink) 72%, transparent); border-top: 1px solid rgba(255,255,255,0.18); font-size: 0.9rem; }
+footer .wrap { padding-block: 20px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+</style>
+
+<header class="bar">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="কারিগরপাড়া ভূমি সেবা, শুরুতে যান">
+      <svg width="26" height="26" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 8l8-3 8 3 8-3v19l-8 3-8-3-8 3zM12 5v19M20 8v19"/></svg>
+      <span>কারিগরপাড়া ভূমি সেবা</span>
+    </a>
+    <nav class="nav" aria-label="প্রধান মেনু">
+      <a href="#services">অনলাইন সেবা</a>
+      <a href="#calc">জমি পরিমাপ</a>
+      <a href="#buying">জমি কেনার আগে</a>
+      <a href="#caution">সতর্কতা</a>
+      <a href="#contact">যোগাযোগ</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div class="wrap">
+      <div>
+        <p class="kicker">কচুয়া · কারিগরপাড়া</p>
+        <h1>জমির কাগজ, পরিমাপ ও সরকারি সেবা এক জায়গায়</h1>
+        <p class="lead">খতিয়ান, পর্চা, নামজারি ও খাজনার অনলাইন সেবার লিংক, শতাংশ-কাঠা-বিঘার হিসাব এবং জমি কেনার আগে কী কী যাচাই করবেন তার তালিকা।</p>
+        <div class="hero-actions">
+          <a class="btn btn-clay" href="#calc">জমির হিসাব করুন</a>
+          <a class="btn btn-line" href="#buying">কেনার আগে যাচাই</a>
+        </div>
+      </div>
+      <svg class="plotmap" viewBox="0 0 440 340" role="img" aria-label="দাগ ও খতিয়ানসহ জমির নকশার চিত্র">
+        <rect x="10" y="10" width="420" height="320" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.5" stroke-width="2" stroke-dasharray="6 6"/>
+        <path d="M10 120 L170 100 L300 130 L430 90" fill="none" stroke="currentColor" stroke-opacity="0.4" stroke-width="6"/>
+        <polygon points="30,30 160,24 170,92 40,100" fill="#4d7c3a" fill-opacity="0.75" stroke="currentColor" stroke-width="1.5"/>
+        <polygon points="176,22 290,28 296,120 180,98" fill="#b5582f" fill-opacity="0.8" stroke="currentColor" stroke-width="1.5"/>
+        <polygon points="306,30 420,22 420,86 310,122" fill="#2f5b78" fill-opacity="0.9" stroke="currentColor" stroke-width="1.5"/>
+        <polygon points="30,140 190,150 180,310 30,300" fill="#d6b24a" fill-opacity="0.8" stroke="currentColor" stroke-width="1.5"/>
+        <polygon points="200,152 420,140 420,310 192,310" fill="#4d7c3a" fill-opacity="0.55" stroke="currentColor" stroke-width="1.5"/>
+        <g font-family="Hind Siliguri, sans-serif" font-size="16" font-weight="700" fill="#fff">
+          <text x="76" y="68">দাগ ১২</text>
+          <text x="208" y="68">দাগ ১৩</text>
+          <text x="340" y="70">দাগ ১৪</text>
+        </g>
+        <g font-family="Hind Siliguri, sans-serif" font-size="16" font-weight="700" fill="#1c2530">
+          <text x="84" y="232">দাগ ২১</text>
+        </g>
+        <g font-family="Hind Siliguri, sans-serif" font-size="16" font-weight="700" fill="#ffffff">
+          <text x="288" y="232">দাগ ২২</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <section id="services">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kicker">অনলাইন ভূমি সেবা</p>
+        <h2>অফিসে না গিয়ে যা করা যায়</h2>
+        <p>নিচের সেবাগুলো ভূমি মন্ত্রণালয়ের সরকারি ওয়েবসাইটে পাওয়া যায়। ব্যক্তিগত তথ্য শুধু সরকারি সাইটে দিন।</p>
+      </div>
+      <div class="svcs">
+        <article class="svc">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 3h9l4 4v14H6zM14 3v5h5M9 13h6M9 17h6"/></svg>
+          <h3>ই-পর্চা (খতিয়ান)</h3>
+          <p>জমির খতিয়ান বা পর্চা অনলাইনে দেখা ও সার্টিফাইড কপির আবেদন।</p>
+          <a class="site" href="https://eporcha.gov.bd" target="_blank" rel="noopener">eporcha.gov.bd</a>
+        </article>
+        <article class="svc">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg>
+          <h3>ই-নামজারি (মিউটেশন)</h3>
+          <p>জমি কেনা বা উত্তরাধিকারের পর নিজের নামে রেকর্ড করার আবেদন ও অবস্থা দেখা।</p>
+          <a class="site" href="https://mutation.land.gov.bd" target="_blank" rel="noopener">mutation.land.gov.bd</a>
+        </article>
+        <article class="svc">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M7 15h4"/></svg>
+          <h3>ভূমি উন্নয়ন কর (খাজনা)</h3>
+          <p>অনলাইনে ভূমি উন্নয়ন কর পরিশোধ ও ডিসিআর রশিদ ডাউনলোড।</p>
+          <a class="site" href="https://ldtax.gov.bd" target="_blank" rel="noopener">ldtax.gov.bd</a>
+        </article>
+        <article class="svc">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3l9 4-9 4-9-4zM3 12l9 4 9-4M3 17l9 4 9-4"/></svg>
+          <h3>ভূমি মন্ত্রণালয় পোর্টাল</h3>
+          <p>ভূমি সংক্রান্ত নোটিশ, আইন ও অন্যান্য সেবার তথ্য।</p>
+          <a class="site" href="https://minland.gov.bd" target="_blank" rel="noopener">minland.gov.bd</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="calc" class="alt">
+    <div class="wrap conv">
+      <div>
+        <p class="kicker">জমি পরিমাপ</p>
+        <h2 style="font-size:clamp(1.6rem,3.6vw,2.2rem);margin-top:6px">শতাংশ, কাঠা, বিঘার হিসাব</h2>
+        <p style="color:var(--muted);margin-top:10px">একটি এককে পরিমাণ লিখলেই সব এককে মান দেখাবে।</p>
+        <form class="form" id="convForm" style="margin-top:20px" onsubmit="return false">
+          <div>
+            <label for="amount">পরিমাণ</label>
+            <input id="amount" type="number" inputmode="decimal" min="0" step="any" value="5">
+          </div>
+          <div>
+            <label for="unit">একক</label>
+            <select id="unit">
+              <option value="decimal">শতাংশ</option>
+              <option value="katha">কাঠা</option>
+              <option value="bigha">বিঘা</option>
+              <option value="acre">একর</option>
+              <option value="hectare">হেক্টর</option>
+              <option value="sqft">বর্গফুট</option>
+              <option value="sqm">বর্গমিটার</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div>
+        <div class="results" id="results" aria-live="polite"></div>
+        <p class="note">ধরা হয়েছে: ১ শতাংশ = ৪৩৫.৬ বর্গফুট, ১ কাঠা = ৭২০ বর্গফুট, ১ বিঘা = ২০ কাঠা, ১ একর = ১০০ শতাংশ। কাঠা ও বিঘার মাপ এলাকাভেদে আলাদা হয়। দলিলের মাপই চূড়ান্ত, লেনদেনের আগে সার্ভেয়ারকে দিয়ে মাপিয়ে নিন।</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="buying">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kicker">জমি কেনার আগে</p>
+        <h2>যাচাইয়ের তালিকা</h2>
+        <p>প্রতিটি কাগজ দেখা হলে টিক দিন। এই তালিকা শুধু আপনার ব্রাউজারে থাকে, সংরক্ষিত হয় না।</p>
+      </div>
+      <p class="progress" id="progress" aria-live="polite"></p>
+      <ul class="checks" id="checks">
+        <li><input type="checkbox" id="c1"><label for="c1"><h3>মূল দলিল ও বায়া দলিল</h3><p>বিক্রেতার মালিকানার ধারাবাহিক দলিল ৩০ বছর পর্যন্ত যাচাই করুন।</p></label></li>
+        <li><input type="checkbox" id="c2"><label for="c2"><h3>এস এ, আর এস ও বিএস খতিয়ান</h3><p>দাগ নম্বর ও খতিয়ানের মালিকের নাম দলিলের সাথে মেলান।</p></label></li>
+        <li><input type="checkbox" id="c3"><label for="c3"><h3>নামজারি ও পর্চা</h3><p>বিক্রেতার নামে নামজারি হয়েছে কি না এবং সর্বশেষ পর্চায় নাম আছে কি না দেখুন।</p></label></li>
+        <li><input type="checkbox" id="c4"><label for="c4"><h3>খাজনার হালনাগাদ রশিদ</h3><p>চলতি বছর পর্যন্ত ভূমি উন্নয়ন কর পরিশোধ হয়েছে কি না নিশ্চিত হন।</p></label></li>
+        <li><input type="checkbox" id="c5"><label for="c5"><h3>উত্তরাধিকারীদের সম্মতি</h3><p>বিক্রেতার অন্য ওয়ারিশ থাকলে সবার সম্মতি ও স্বাক্ষর আছে কি না দেখুন।</p></label></li>
+        <li><input type="checkbox" id="c6"><label for="c6"><h3>মামলা ও বন্ধক যাচাই</h3><p>জমিতে মামলা, ঋণ বা বন্ধক আছে কি না সাব-রেজিস্ট্রি ও এলাকার প্রবীণদের কাছে খোঁজ নিন।</p></label></li>
+        <li><input type="checkbox" id="c7"><label for="c7"><h3>সরেজমিনে সীমানা দেখা</h3><p>সার্ভেয়ার নিয়ে জমি মাপুন এবং আশপাশের জমির মালিকদের সাথে কথা বলুন।</p></label></li>
+        <li><input type="checkbox" id="c8"><label for="c8"><h3>রেজিস্ট্রেশন ও খরচ</h3><p>সাব-রেজিস্ট্রি অফিসে রেজিস্ট্রি, স্ট্যাম্প ও কর বাবদ সরকারি ফি হিসাব করে রাখুন।</p></label></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="caution" class="alt">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kicker">সতর্কতা</p>
+        <h2>প্রতারণা এড়াতে মনে রাখুন</h2>
+      </div>
+      <div class="caution">
+        <article class="warn"><h3>বায়নার আগে কাগজ দেখুন</h3><p>পুরো কাগজ যাচাই না করে অগ্রিম টাকা দেবেন না। বায়নাও লিখিত ও সাক্ষীসহ করুন।</p></article>
+        <article class="warn"><h3>নগদ লেনদেন এড়ান</h3><p>বড় অঙ্কের টাকা ব্যাংকের মাধ্যমে দিন এবং প্রাপ্তিস্বীকার রাখুন।</p></article>
+        <article class="warn"><h3>একই জমি দুইবার বিক্রি</h3><p>রেজিস্ট্রির আগে সাব-রেজিস্ট্রি অফিসে অন্য কোনো দলিল হয়েছে কি না খোঁজ নিন।</p></article>
+        <article class="warn"><h3>দালালের কথায় নির্ভর নয়</h3><p>কাগজের সত্যতা নিজে বা আইনজীবীর মাধ্যমে যাচাই করুন, মুখের কথায় নয়।</p></article>
+      </div>
+      <p class="note">এই পাতা সাধারণ তথ্য দেয়, আইনি পরামর্শ নয়। বড় লেনদেনের আগে অভিজ্ঞ ভূমি আইনজীবীর সাথে কথা বলুন।</p>
+    </div>
+  </section>
+
+  <section id="contact" class="band">
+    <div class="wrap cols">
+      <div>
+        <p class="kicker">সরকারি সহায়তা</p>
+        <h2>ভূমি নিয়ে প্রশ্ন বা অভিযোগ থাকলে</h2>
+        <p>ভূমি সংক্রান্ত সেবা ও অভিযোগের জন্য ভূমি মন্ত্রণালয়ের হটলাইনে ফোন করতে পারেন। সরাসরি সহায়তার জন্য ইউনিয়ন ভূমি অফিস বা উপজেলা ভূমি অফিসে যান।</p>
+        <div class="helpline">
+          <div><span>ভূমি মন্ত্রণালয় হটলাইন</span><br><b>১৬১২২</b></div>
+          <span>দেশের যেকোনো মোবাইল থেকে</span>
+        </div>
+      </div>
+      <div>
+        <p class="kicker">স্থানীয় যোগাযোগ</p>
+        <h2>কারিগরপাড়া ভূমি সহায়তা</h2>
+        <ul class="contact-list">
+          <li><span>ঠিকানা</span><b>কারিগরপাড়া, কচুয়া</b></li>
+          <li><span>ইউনিয়ন ভূমি অফিস</span><b>ইউনিয়ন পরিষদ কমপ্লেক্স</b></li>
+          <li><span>উপজেলা ভূমি অফিস</span><b>কচুয়া উপজেলা সদর</b></li>
+          <li><span>ফোন</span><b>০১XXX-XXXXXX</b></li>
+        </ul>
+        <p>নম্বর ও ঠিকানা সঠিক তথ্য দিয়ে বদলে নিন।</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© কারিগরপাড়া ভূমি সেবা তথ্যকেন্দ্র</span>
+    <span>তথ্য সাধারণ জ্ঞানের জন্য, সরকারি বিধি চূড়ান্ত।</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var D = "০১২৩৪৫৬৭৮৯";
+  function bn(s) { return String(s).replace(/[0-9]/g, function (d) { return D[d]; }); }
+  // each unit in square feet
+  var SQFT = { decimal: 435.6, katha: 720, bigha: 14400, acre: 43560, hectare: 107639.1, sqft: 1, sqm: 10.7639 };
+  var NAME = { decimal: "শতাংশ", katha: "কাঠা", bigha: "বিঘা", acre: "একর", hectare: "হেক্টর", sqft: "বর্গফুট", sqm: "বর্গমিটার" };
+  var amt = document.getElementById("amount"), unit = document.getElementById("unit"), out = document.getElementById("results");
+  function fmt(n) {
+    var r = n >= 100 ? Math.round(n * 10) / 10 : Math.round(n * 1000) / 1000;
+    return bn(r.toLocaleString("en-US", { maximumFractionDigits: 3 }));
+  }
+  function render() {
+    var v = parseFloat(amt.value);
+    if (!isFinite(v) || v < 0) v = 0;
+    var base = v * SQFT[unit.value];
+    var html = "";
+    Object.keys(SQFT).forEach(function (k) {
+      html += '<div class="res' + (k === unit.value ? " on" : "") + '"><span>' + NAME[k] + "</span><b>" + fmt(base / SQFT[k]) + "</b></div>";
+    });
+    out.innerHTML = html;
+  }
+  amt.addEventListener("input", render);
+  unit.addEventListener("change", render);
+  render();
+
+  var boxes = document.querySelectorAll("#checks input"), prog = document.getElementById("progress");
+  function upd() {
+    var n = 0; boxes.forEach(function (b) { if (b.checked) n++; });
+    prog.innerHTML = "যাচাই হয়েছে <b>" + bn(n) + "</b> / " + bn(boxes.length) + (n === boxes.length ? "। সব কাগজ যাচাই শেষ।" : "");
+  }
+  boxes.forEach(function (b) { b.addEventListener("change", upd); });
+  upd();
+})();
+</script>
+
+</body></html>
