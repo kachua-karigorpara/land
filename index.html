@@ -1,360 +1,909 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<title>কারিগরপাড়া ভূমি সেবা</title>
+<title>কচুয়া কারিগরপাড়া ভূমি তথ্য</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@600;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@400;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&display=swap">
 <style>
-/* Layout: survey-map hero with plot grid, online services cards, live land-unit converter, buying checklist, caution list, contact band */
-:root {
-  --bg: #f5f3ec;
-  --surface: #fffefa;
-  --fg: #1c2530;
-  --muted: #586270;
-  --ink: #1f3a4d;
-  --ink-2: #2f5b78;
-  --clay: #b5582f;
-  --clay-soft: #f4dccd;
-  --leaf: #4d7c3a;
-  --line: #dad6c8;
-  --on-ink: #eef3f6;
-  --font-display: "Noto Serif Bengali", "Kalpurush", serif;
-  --font-body: "Hind Siliguri", "Noto Sans Bengali", system-ui, sans-serif;
+/* Layout concept: a survey-sheet website. Green field-ink hero with graph-paper grid, real scanned mouza maps as the primary imagery, white "record cards" on a pale green ground, survey-red used only for stamps and hotspots. */
+:root{
+  --bg:#F2F5EF; --surface:#FFFFFF; --surface2:#E7EEE4; --fg:#16231C; --muted:#475A4F; --line:#C9D5C6;
+  --accent:#1F6B47; --accent-fg:#FFFFFF; --ink:#1D3557; --stamp:#B03A2E; --paper:#E9DCC3;
+  --hero-bg:#123524; --hero-fg:#F2F5EF; --hero-muted:#B9CDBF; --hero-line:rgba(255,255,255,.08);
+  --f-display:"Anek Bangla","Hind Siliguri","Noto Sans Bengali",system-ui,sans-serif;
+  --f-body:"Hind Siliguri","Noto Sans Bengali",system-ui,sans-serif;
 }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #0f1519; --surface: #161e24; --fg: #e6edf2; --muted: #9bacb8;
-    --ink: #0b1c28; --ink-2: #5d9bc0; --clay: #e08a5f; --clay-soft: #33231a; --leaf: #8cbf72;
-    --line: #26323b; --on-ink: #eef3f6; color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #0f1519; --surface: #161e24; --fg: #e6edf2; --muted: #9bacb8;
-  --ink: #0b1c28; --ink-2: #5d9bc0; --clay: #e08a5f; --clay-soft: #33231a; --leaf: #8cbf72;
-  --line: #26323b; --on-ink: #eef3f6; color-scheme: dark;
-}
-* { box-sizing: border-box; }
-body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 17px; line-height: 1.7; }
-a { color: inherit; }
-:focus-visible { outline: 3px solid var(--clay); outline-offset: 2px; }
-h1, h2, h3 { font-family: var(--font-display); line-height: 1.4; margin: 0; text-wrap: balance; }
-p { margin: 0; }
-.wrap {
-  max-width: 1120px; margin-inline: auto;
-  padding-left: max(16px, env(safe-area-inset-left, 0px));
-  padding-right: max(16px, env(safe-area-inset-right, 0px));
-}
-.kicker { font-size: 0.85rem; letter-spacing: 0.08em; color: var(--clay); font-weight: 600; }
-body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--ink); }
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0E1713; --surface:#15221C; --surface2:#1B2B24; --fg:#E6EEE8; --muted:#9DB2A6; --line:#2A3D33;
+  --accent:#5CC08B; --accent-fg:#0E1713; --ink:#8FB4E8; --stamp:#F0877A; --paper:#3A3326;
+  --hero-bg:#0A1F15; --hero-fg:#E6EEE8; --hero-muted:#9DB2A6; --hero-line:rgba(255,255,255,.06); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E1713; --surface:#15221C; --surface2:#1B2B24; --fg:#E6EEE8; --muted:#9DB2A6; --line:#2A3D33;
+  --accent:#5CC08B; --accent-fg:#0E1713; --ink:#8FB4E8; --stamp:#F0877A; --paper:#3A3326;
+  --hero-bg:#0A1F15; --hero-fg:#E6EEE8; --hero-muted:#9DB2A6; --hero-line:rgba(255,255,255,.06); color-scheme:dark}
 
-.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 9; background: var(--ink); color: var(--on-ink); }
-.bar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 10px; }
-.brand { font-family: var(--font-display); font-weight: 800; text-decoration: none; display: flex; align-items: center; gap: 10px; min-width: 0; }
-.nav { display: flex; gap: 2px; flex-wrap: wrap; justify-content: flex-end; }
-.nav a { text-decoration: none; padding: 6px 12px; border-radius: 6px; font-size: 0.95rem; }
-.nav a:hover { background: rgba(255,255,255,0.12); }
-@media (max-width: 760px) { .nav a:nth-child(n+4) { display: none; } }
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:17px;line-height:1.75;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--surface)}
+h1,h2,h3,h4{font-family:var(--f-display);line-height:1.3;margin:0;text-wrap:balance}
+p{margin:0 0 .9em}
+a{color:var(--accent)}
+img{max-width:100%;display:block}
+:focus-visible{outline:3px solid var(--stamp);outline-offset:2px;border-radius:4px}
+button{font:inherit;color:inherit;cursor:pointer}
+.wrap{max-width:1160px;margin-inline:auto}
+section{scroll-margin-top:84px}
+.band{margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding-inline:max(16px,env(safe-area-inset-left,0px))}
+
+/* header */
+.site-head{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--surface);border-bottom:1px solid var(--line);
+  margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding-inline:max(16px,env(safe-area-inset-left,0px))}
+.head-in{max-width:1160px;margin-inline:auto;display:flex;align-items:center;gap:16px;min-height:66px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--fg);min-width:0}
+.brand svg{flex:none}
+.brand b{font-family:var(--f-display);font-size:1.15rem;font-weight:800;line-height:1.15;display:block}
+.brand small{display:block;color:var(--muted);font-size:.78rem;line-height:1.2}
+nav{margin-left:auto}
+nav ul{list-style:none;margin:0;padding:0;display:flex;gap:2px}
+nav a{display:block;padding:8px 12px;border-radius:8px;text-decoration:none;color:var(--fg);font-weight:600;font-size:.97rem;white-space:nowrap}
+nav a:hover,nav a.on{background:var(--surface2);color:var(--accent)}
+.head-btns{display:flex;gap:8px}
+.icon-btn{width:42px;height:42px;border-radius:10px;border:1px solid var(--line);background:var(--surface);display:grid;place-items:center}
+.icon-btn:hover{background:var(--surface2)}
+.menu-btn{display:none}
+@media (max-width:980px){
+  .menu-btn{display:grid}
+  nav{position:absolute;left:0;right:0;top:100%;background:var(--surface);border-bottom:1px solid var(--line);display:none;
+    padding:8px max(16px,env(safe-area-inset-left,0px)) 14px;margin:0}
+  nav.open{display:block}
+  nav ul{flex-direction:column}
+  nav a{padding:12px}
+  .head-btns{margin-left:auto}
+}
 
 /* hero */
-.hero { background: var(--ink); color: var(--on-ink); position: relative; overflow: hidden; }
-.hero .wrap { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: center; padding-block: 60px; position: relative; }
-.hero .kicker { color: var(--clay-soft); }
-.hero h1 { font-size: clamp(2rem, 5.2vw, 3.4rem); font-weight: 800; margin-top: 10px; }
-.hero .lead { margin-top: 16px; max-width: 33em; color: color-mix(in srgb, var(--on-ink) 85%, transparent); font-size: 1.08rem; }
-.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
-.btn { display: inline-block; text-decoration: none; padding: 11px 22px; border-radius: 8px; font-weight: 600; border: 2px solid transparent; cursor: pointer; font-family: inherit; font-size: 1rem; }
-.btn-clay { background: var(--clay); color: #fff; }
-:root[data-theme="dark"] .btn-clay { color: #1a0d05; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .btn-clay { color: #1a0d05; } }
-.btn-clay:hover { filter: brightness(1.1); }
-.btn-line { border-color: rgba(255,255,255,0.45); color: var(--on-ink); }
-.btn-line:hover { background: rgba(255,255,255,0.12); }
-.plotmap { width: 100%; height: auto; max-width: 440px; justify-self: center; color: var(--on-ink); }
-@media (max-width: 860px) { .hero .wrap { grid-template-columns: 1fr; } .plotmap { max-width: 360px; } }
+.hero{background:var(--hero-bg);color:var(--hero-fg);position:relative;overflow:hidden;
+  background-image:linear-gradient(var(--hero-line) 1px,transparent 1px),linear-gradient(90deg,var(--hero-line) 1px,transparent 1px);background-size:36px 36px;
+  margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding-inline:max(16px,env(safe-area-inset-left,0px));padding-block:40px 28px}
+.hero-in{max-width:1160px;margin-inline:auto}
+.slides{display:grid}
+.slide{grid-area:1/1;display:grid;grid-template-columns:1.05fr .95fr;gap:36px;align-items:center;opacity:0;visibility:hidden;transition:opacity .6s,visibility .6s}
+.slide.on{opacity:1;visibility:visible}
+.slide>*{min-width:0}
+.kicker{display:inline-block;font-family:var(--f-display);font-weight:700;font-size:.85rem;letter-spacing:.04em;color:var(--hero-bg);background:#CFE8D6;padding:3px 12px;border-radius:99px;margin-bottom:14px}
+.slide h1{font-size:clamp(1.9rem,4.6vw,3.2rem);font-weight:800;margin-bottom:14px}
+.slide p.lead{color:var(--hero-muted);font-size:1.1rem;max-width:34em}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 22px;border-radius:10px;font-weight:700;text-decoration:none;border:2px solid transparent;font-family:var(--f-display)}
+.btn.main{background:#CFE8D6;color:#0E2A1B}
+.btn.main:hover{background:#fff}
+.btn.ghost{border-color:rgba(255,255,255,.4);color:var(--hero-fg)}
+.btn.ghost:hover{background:rgba(255,255,255,.1)}
+.plate{margin:0;background:var(--paper);padding:10px 10px 12px;border-radius:6px;box-shadow:0 18px 40px rgba(0,0,0,.35)}
+.plate img{width:100%;aspect-ratio:16/11;object-fit:cover;border-radius:2px;background:var(--paper)}
+.plate figcaption{font-size:.84rem;color:#3b3022;padding-top:8px;line-height:1.45}
+.hero-ctl{display:flex;align-items:center;gap:10px;margin-top:26px}
+.dots{display:flex;gap:8px}
+.dot{width:12px;height:12px;border-radius:99px;border:2px solid var(--hero-muted);background:transparent;padding:0}
+.dot[aria-current="true"]{background:#CFE8D6;border-color:#CFE8D6;width:34px}
+.arrow{width:40px;height:40px;border-radius:99px;border:1px solid rgba(255,255,255,.35);background:transparent;color:var(--hero-fg);display:grid;place-items:center}
+.arrow:hover{background:rgba(255,255,255,.12)}
+.hero-ctl .sp{flex:1}
+@media (max-width:820px){
+  .slide{grid-template-columns:1fr;gap:20px}
+  .plate img{aspect-ratio:16/10}
+  .hero{padding-block:28px 22px}
+}
 
-section { padding-block: 64px; }
-.sec-head { max-width: 42em; margin-bottom: 32px; }
-.sec-head h2 { font-size: clamp(1.6rem, 3.6vw, 2.2rem); margin-top: 6px; }
-.sec-head p { color: var(--muted); margin-top: 10px; }
-.alt { background: var(--surface); border-block: 1px solid var(--line); }
+/* generic sections */
+.sec{padding-block:64px}
+.sec-head{max-width:760px;margin-bottom:30px}
+.eyebrow{font-family:var(--f-display);font-weight:700;color:var(--accent);font-size:.9rem;letter-spacing:.05em;margin-bottom:6px}
+.sec h2{font-size:clamp(1.6rem,3.4vw,2.35rem);font-weight:800;margin-bottom:10px}
+.sec-head p{color:var(--muted);font-size:1.06rem}
+.alt{background:var(--surface2);margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding-inline:max(16px,env(safe-area-inset-left,0px))}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px}
+.card h3{font-size:1.2rem;margin-bottom:6px}
+.grid{display:grid;gap:18px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:900px){.g3,.g4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:620px){.g2,.g3,.g4{grid-template-columns:minmax(0,1fr)}.sec{padding-block:48px}}
+.note{background:var(--surface);border-left:5px solid var(--accent);padding:14px 18px;border-radius:0 10px 10px 0;color:var(--fg);margin-top:22px}
+.note.warn{border-left-color:var(--stamp)}
+.tag{display:inline-block;background:var(--surface2);border:1px solid var(--line);padding:1px 10px;border-radius:99px;font-size:.82rem;font-weight:600;color:var(--muted)}
+.fake{font-size:.82rem;color:var(--stamp);font-weight:700}
 
-/* services */
-.svcs { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 18px; }
-.svc { border: 1px solid var(--line); border-radius: 12px; padding: 22px; background: var(--surface); display: flex; flex-direction: column; gap: 6px; min-width: 0; }
-.svc h3 { font-size: 1.15rem; }
-.svc p { color: var(--muted); font-size: 0.95rem; }
-.svc .site { margin-top: auto; padding-top: 10px; font-weight: 600; color: var(--ink-2); text-decoration: none; word-break: break-all; }
-.svc .site:hover { text-decoration: underline; }
-.svc svg { color: var(--clay); }
+/* 4-question chain */
+.chain{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin-top:6px}
+.chain .link{position:relative;background:var(--surface);border:1px solid var(--line);padding:20px 18px 18px;border-radius:14px;margin-right:26px}
+.chain .link:last-child{margin-right:0}
+.chain .link:not(:last-child)::after{content:"";position:absolute;right:-27px;top:50%;width:26px;height:3px;background:var(--accent)}
+.chain .link:not(:last-child)::before{content:"";position:absolute;right:-30px;top:calc(50% - 6px);border-left:9px solid var(--accent);border-top:7px solid transparent;border-bottom:7px solid transparent;z-index:1}
+.chain .q{font-family:var(--f-display);font-weight:800;font-size:1.5rem;color:var(--stamp);line-height:1.1}
+.chain h3{font-size:1.15rem;margin:4px 0 6px}
+.chain p{font-size:.95rem;color:var(--muted);margin:0}
+@media (max-width:900px){
+  .chain{grid-template-columns:minmax(0,1fr);gap:26px}
+  .chain .link{margin-right:0}
+  .chain .link:not(:last-child)::after{right:auto;left:50%;top:auto;bottom:-27px;width:3px;height:26px}
+  .chain .link:not(:last-child)::before{right:auto;left:calc(50% - 6px);top:auto;bottom:-31px;border-left:7px solid transparent;border-right:7px solid transparent;border-top:9px solid var(--accent);border-bottom:0}
+}
 
-/* converter */
-.conv { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 32px; align-items: start; }
-.form { background: var(--bg); border: 1px solid var(--line); border-radius: 14px; padding: 22px; display: grid; gap: 14px; min-width: 0; }
-.form label { font-weight: 600; font-size: 0.95rem; display: block; margin-bottom: 4px; }
-.form input, .form select { width: 100%; font: inherit; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--fg); }
-.results { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; min-width: 0; }
-.res { border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; background: var(--bg); min-width: 0; }
-.res span { display: block; font-size: 0.85rem; color: var(--muted); }
-.res b { font-family: var(--font-display); font-size: 1.3rem; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
-.res.on { border-color: var(--clay); background: var(--clay-soft); }
-:root[data-theme="dark"] .res.on b { color: var(--fg); }
-.note { margin-top: 14px; font-size: 0.88rem; color: var(--muted); }
-@media (max-width: 860px) { .conv { grid-template-columns: 1fr; } }
+/* nested address */
+.nest{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:center}
+.box{border:2px solid var(--ink);border-radius:14px;padding:30px 14px 14px;position:relative;background:color-mix(in srgb,var(--surface) 88%,var(--ink))}
+.box>.lab{position:absolute;top:6px;left:14px;font-family:var(--f-display);font-weight:700;font-size:.92rem;color:var(--ink)}
+.box>.lab em{font-style:normal;color:var(--muted);font-weight:500;margin-left:6px}
+.box .box{margin-top:8px}
+.box.plot{background:var(--paper);border-color:var(--stamp);color:#2d2418}
+.box.plot>.lab{color:var(--stamp)}
+.box.plot .khat{margin-top:6px;font-size:.92rem;line-height:1.5;color:#2d2418}
+@media (max-width:820px){.nest{grid-template-columns:minmax(0,1fr)}}
+
+/* timeline */
+.axis{position:relative;height:150px;margin:28px 6px 10px}
+.axis::before{content:"";position:absolute;left:0;right:0;top:64px;height:4px;background:var(--line);border-radius:4px}
+.mk{position:absolute;top:0;transform:translateX(-50%);width:130px;text-align:center;height:150px}
+.mk .pin{position:absolute;left:50%;top:57px;width:18px;height:18px;margin:0 0 0 -9px;border-radius:50%;background:var(--accent);border:3px solid var(--bg);box-shadow:0 0 0 2px var(--accent)}
+.mk .lbl{position:absolute;left:0;right:0;top:86px}
+.mk.up .lbl{top:auto;bottom:100px}
+.mk b{display:block;font-family:var(--f-display);font-size:1rem;line-height:1.2}
+.mk span{font-size:.82rem;color:var(--muted);line-height:1.3;display:block}
+.ticks{display:flex;justify-content:space-between;color:var(--muted);font-size:.8rem;margin:0 6px}
+@media (max-width:700px){
+  .axis{height:auto;margin:10px 0}
+  .axis::before{left:8px;right:auto;top:0;bottom:0;width:4px;height:auto}
+  .mk{position:relative;left:auto!important;top:auto!important;transform:none;width:auto;height:auto;text-align:left;padding-left:34px;margin-bottom:18px}
+  .mk .pin{left:0;top:4px;margin:0}
+  .mk .lbl,.mk.up .lbl{position:static}
+  .ticks{display:none}
+}
+
+/* tabs */
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tab{padding:8px 16px;border-radius:99px;border:1px solid var(--line);background:var(--surface);font-weight:700;font-family:var(--f-display)}
+.tab[aria-selected="true"]{background:var(--accent);color:var(--accent-fg);border-color:var(--accent)}
+.panel[hidden]{display:none!important}
+
+/* khatiyan sample */
+.sheet{background:var(--paper);color:#2d2418;border-radius:8px;padding:18px;border:1px solid #bfae8c;font-size:.95rem;position:relative}
+.sheet h4{font-family:var(--f-display);text-align:center;font-size:1.05rem;border-bottom:2px solid #2d2418;padding-bottom:6px;margin-bottom:10px}
+.sheet table{width:100%;border-collapse:collapse}
+.sheet th,.sheet td{border:1px solid #8c7a58;padding:5px 8px;text-align:left;vertical-align:top;line-height:1.4}
+.sheet th{background:rgba(0,0,0,.06);font-weight:700}
+.sheet .fl{position:absolute;right:10px;top:8px;font-size:.75rem;color:#8a2a20;font-weight:700}
+.sheet-wrap{overflow-x:auto}
+.sheet-wrap .sheet{min-width:500px}
+.cal{display:inline-grid;place-items:center;min-width:24px;height:24px;border-radius:50%;background:var(--stamp);color:#fff;font-size:.8rem;font-weight:700;margin-right:6px;flex:none;font-family:var(--f-body)}
+.sheet .cal{width:22px;min-width:22px;height:22px;margin:0 6px 0 0}
+.how{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.how li{display:flex;gap:10px;align-items:flex-start}
+.how li div{min-width:0}
+.how b{font-family:var(--f-display)}
+
+/* steps */
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:0;counter-reset:s}
+.steps li{display:grid;grid-template-columns:48px minmax(0,1fr);gap:16px;padding-bottom:22px;position:relative}
+.steps li:not(:last-child)::before{content:"";position:absolute;left:23px;top:48px;bottom:0;width:3px;background:var(--line)}
+.steps .n{width:48px;height:48px;border-radius:50%;background:var(--accent);color:var(--accent-fg);font-family:var(--f-display);font-weight:800;font-size:1.2rem;display:grid;place-items:center}
+.steps h4{font-size:1.1rem;margin-bottom:2px}
+.steps p{color:var(--muted);margin:0}
+
+.ba{display:grid;grid-template-columns:1fr 54px 1fr;gap:0;align-items:stretch}
+.ba .side{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px}
+.ba .side.after{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent) inset}
+.ba .mid{display:grid;place-items:center;font-family:var(--f-display);font-weight:800;color:var(--accent);text-align:center;font-size:.8rem;line-height:1.2}
+.ba .mid i{display:block;font-style:normal;font-size:1.8rem}
+.row{display:flex;gap:8px;align-items:baseline;justify-content:space-between;border-bottom:1px dashed var(--line);padding:6px 0;font-size:.97rem}
+.row:last-child{border-bottom:0}
+.row span{color:var(--muted)}
+.row b{text-align:right}
+.bad{color:var(--stamp)}.good{color:var(--accent)}
+@media (max-width:700px){.ba{grid-template-columns:minmax(0,1fr)}.ba .mid{padding:8px}.ba .mid i{transform:rotate(90deg)}}
+
+/* dolil */
+.dolil{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:30px;align-items:start}
+@media (max-width:860px){.dolil{grid-template-columns:minmax(0,1fr)}}
+.types dt{font-family:var(--f-display);font-weight:700}
+.types dd{margin:0 0 12px;color:var(--muted);font-size:.97rem}
 
 /* checklist */
-.checks { display: grid; grid-template-columns: 1fr 1fr; gap: 0 40px; border-top: 1px solid var(--line); margin: 0; padding: 0; list-style: none; }
-.checks li { padding: 16px 0; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 30px 1fr; gap: 12px; min-width: 0; }
-.checks input { width: 22px; height: 22px; margin-top: 5px; accent-color: var(--leaf); }
-.checks h3 { font-size: 1.05rem; }
-.checks p { color: var(--muted); font-size: 0.94rem; margin-top: 2px; }
-.progress { margin-bottom: 18px; color: var(--muted); font-size: 0.95rem; }
-.progress b { color: var(--fg); font-variant-numeric: tabular-nums; }
-@media (max-width: 760px) { .checks { grid-template-columns: 1fr; } }
+.chk{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:30px;align-items:start}
+@media (max-width:760px){.chk{grid-template-columns:minmax(0,1fr)}}
+.chk ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.chk label{display:flex;gap:12px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;cursor:pointer}
+.chk input{width:22px;height:22px;margin-top:3px;accent-color:var(--accent);flex:none}
+.chk label:has(input:checked){border-color:var(--accent);background:color-mix(in srgb,var(--surface) 88%,var(--accent))}
+.chk label:has(input:checked) span{color:var(--muted)}
+.ring{--p:0;width:180px;height:180px;border-radius:50%;background:conic-gradient(var(--accent) calc(var(--p)*1%),var(--line) 0);display:grid;place-items:center;margin-inline:auto}
+.ring div{width:140px;height:140px;border-radius:50%;background:var(--bg);display:grid;place-items:center;text-align:center;font-family:var(--f-display);font-weight:800;font-size:1.9rem;line-height:1.1}
+.ring small{display:block;font-size:.8rem;font-weight:500;color:var(--muted)}
+.stick{position:sticky;top:90px}
 
-/* caution */
-.caution { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
-.warn { border: 1px solid var(--line); border-left: 5px solid var(--clay); border-radius: 10px; padding: 18px 20px; background: var(--bg); min-width: 0; }
-.warn h3 { font-size: 1.05rem; }
-.warn p { color: var(--muted); font-size: 0.94rem; margin-top: 4px; }
+/* map explorer */
+.explorer{display:grid;grid-template-columns:minmax(0,420px) minmax(0,1fr);gap:34px;align-items:start}
+@media (max-width:860px){.explorer{grid-template-columns:minmax(0,1fr)}}
+.mapbox{position:relative;border-radius:8px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.2);background:var(--paper)}
+.mapbox img{width:100%;height:auto}
+.hs{position:absolute;border:2px dashed var(--stamp);background:rgba(176,58,46,.1);border-radius:4px;padding:0;min-width:18px;min-height:18px}
+.hs span{position:absolute;left:-2px;top:-14px;transform:translateY(-30%);background:var(--stamp);color:#fff;font-size:.75rem;font-weight:700;border-radius:99px;min-width:22px;height:22px;display:grid;place-items:center;font-family:var(--f-body)}
+.hs.on{background:rgba(176,58,46,.28);border-style:solid;border-width:3px}
+.picklist{list-style:none;margin:0 0 14px;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.picklist button{display:flex;gap:6px;align-items:center;padding:6px 12px 6px 6px;border-radius:99px;border:1px solid var(--line);background:var(--surface);font-weight:600;font-size:.92rem}
+.picklist button[aria-pressed="true"]{background:var(--accent);color:var(--accent-fg);border-color:var(--accent)}
+.picklist .cal{margin:0}
+.info{min-height:150px}
+.info h3{margin-bottom:6px}
 
-/* band */
-.band { background: var(--ink); color: var(--on-ink); }
-.band .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-.band .kicker { color: var(--clay-soft); }
-.band h2 { font-size: clamp(1.5rem, 3.2vw, 2rem); margin-top: 6px; }
-.band p { color: color-mix(in srgb, var(--on-ink) 88%, transparent); margin-top: 10px; }
-.helpline { margin-top: 18px; border: 1px solid rgba(255,255,255,0.3); border-radius: 12px; padding: 18px 20px; display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; }
-.helpline b { font-family: var(--font-display); font-size: 2.2rem; color: #f0b48f; line-height: 1.2; font-variant-numeric: tabular-nums; }
-.helpline span { color: var(--clay-soft); font-size: 0.92rem; }
-.contact-list { margin: 18px 0 0; padding: 0; list-style: none; display: grid; gap: 12px; }
-.contact-list li { display: grid; grid-template-columns: 100px 1fr; gap: 12px; }
-.contact-list span { color: var(--clay-soft); font-size: 0.9rem; }
-@media (max-width: 860px) { .band .cols { grid-template-columns: 1fr; } }
-footer { background: var(--ink); color: color-mix(in srgb, var(--on-ink) 72%, transparent); border-top: 1px solid rgba(255,255,255,0.18); font-size: 0.9rem; }
-footer .wrap { padding-block: 20px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; }
-@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+.parts figure{margin:0;display:flex;flex-direction:column;height:100%}
+.parts .shot{background:var(--paper);border-radius:8px;padding:6px;border:1px solid var(--line)}
+.parts .shot img{width:100%;height:190px;object-fit:contain;object-position:center}
+.parts figcaption{padding-top:10px;font-size:.95rem;color:var(--muted);line-height:1.6}
+.parts figcaption b{display:block;color:var(--fg);font-family:var(--f-display);font-size:1.05rem}
+
+.scale{display:grid;gap:18px}
+.bar{display:flex;height:34px;border:2px solid var(--fg);border-radius:4px;overflow:hidden}
+.bar i{flex:1;border-right:2px solid var(--fg)}
+.bar i:nth-child(odd){background:var(--fg)}
+.bar i:last-child{border-right:0}
+.bar-lab{display:flex;justify-content:space-between;font-size:.85rem;color:var(--muted);margin-top:4px}
+.eq{display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-family:var(--f-display);font-weight:700}
+.eq span{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:8px 14px}
+.eq em{font-style:normal;color:var(--accent);font-size:1.3rem}
+
+.legend{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.legend div{display:flex;gap:10px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-weight:600;font-size:.95rem}
+.legend svg{flex:none;width:30px;height:30px;color:var(--fg)}
+
+.conv{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:26px;align-items:start}
+@media (max-width:760px){.conv{grid-template-columns:minmax(0,1fr)}}
+.conv input,.conv select{width:100%;font:inherit;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--fg);margin-bottom:10px}
+.out{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.out div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.out small{color:var(--muted);display:block;font-size:.85rem}
+.out b{font-family:var(--f-display);font-size:1.25rem;overflow-wrap:anywhere}
+
+/* gallery */
+.gal{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+@media (max-width:900px){.gal{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.gal{grid-template-columns:minmax(0,1fr)}}
+.gi{padding:0;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--surface);text-align:left;display:flex;flex-direction:column}
+.gi .th{background:var(--paper);height:240px;overflow:hidden}
+.gi img{width:100%;height:100%;object-fit:cover;object-position:top}
+.gi:hover{border-color:var(--accent)}
+.gi div.t{padding:12px 14px}
+.gi b{font-family:var(--f-display);display:block;line-height:1.3}
+.gi small{color:var(--muted)}
+.lb{position:fixed;inset:0;z-index:100;background:rgba(5,12,8,.92);display:none;flex-direction:column;
+  padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px)}
+.lb.open{display:flex}
+.lb-bar{display:flex;gap:8px;align-items:center;padding:10px 14px;color:#fff;flex-wrap:wrap}
+.lb-bar b{font-family:var(--f-display);flex:1;min-width:160px}
+.lb-bar button{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:8px;min-width:40px;height:40px;padding:0 12px;font-weight:700}
+.lb-bar button:hover{background:rgba(255,255,255,.25)}
+.lb-view{flex:1;overflow:auto;padding:0 14px 14px}
+.lb-view img{max-width:none;margin:0 auto;background:var(--paper)}
+
+/* faq */
+details{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:0 18px;margin-bottom:10px}
+summary{cursor:pointer;padding:14px 0;font-family:var(--f-display);font-weight:700;font-size:1.05rem;list-style:none;display:flex;justify-content:space-between;gap:12px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-size:1.5rem;color:var(--accent);line-height:1}
+details[open] summary::after{content:"−"}
+details>div{padding-bottom:14px;color:var(--muted)}
+
+.offices{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.links{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.links a{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:9px 16px;text-decoration:none;font-weight:700;font-family:var(--f-display)}
+.links a:hover{border-color:var(--accent)}
+.links small{display:block;font-weight:400;color:var(--muted);font-family:var(--f-body);font-size:.8rem;overflow-wrap:anywhere}
+
+footer{background:var(--hero-bg);color:var(--hero-muted);margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding-inline:max(16px,env(safe-area-inset-left,0px));padding-block:34px;font-size:.93rem}
+footer b{color:var(--hero-fg);font-family:var(--f-display);font-size:1.1rem}
+footer .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+footer a{color:#CFE8D6}
+
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.slide{transition:none}}
 </style>
 
-<header class="bar">
-  <div class="wrap">
-    <a class="brand" href="#top" aria-label="কারিগরপাড়া ভূমি সেবা, শুরুতে যান">
-      <svg width="26" height="26" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 8l8-3 8 3 8-3v19l-8 3-8-3-8 3zM12 5v19M20 8v19"/></svg>
-      <span>কারিগরপাড়া ভূমি সেবা</span>
+<header class="site-head">
+  <div class="head-in">
+    <a class="brand" href="#home" aria-label="কচুয়া কারিগরপাড়া ভূমি তথ্য, হোম">
+      <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><rect x="1" y="1" width="38" height="38" rx="9" fill="#1F6B47"/><path d="M8 13l10-3 14 4v14l-12 4-12-5z" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"/><path d="M18 10v21M8 21l24-3" stroke="#fff" stroke-width="1.5" opacity=".7"/><circle cx="26" cy="26" r="3.5" fill="#E8B04B"/></svg>
+      <span><b>কচুয়া কারিগরপাড়া</b><small>ভূমি তথ্য কেন্দ্র</small></span>
     </a>
-    <nav class="nav" aria-label="প্রধান মেনু">
-      <a href="#services">অনলাইন সেবা</a>
-      <a href="#calc">জমি পরিমাপ</a>
-      <a href="#buying">জমি কেনার আগে</a>
-      <a href="#caution">সতর্কতা</a>
-      <a href="#contact">যোগাযোগ</a>
+    <nav id="nav" aria-label="প্রধান মেনু">
+      <ul>
+        <li><a href="#home" class="on">হোম</a></li>
+        <li><a href="#khatiyan">সার্ভে খতিয়ান</a></li>
+        <li><a href="#namjari">নামজারি</a></li>
+        <li><a href="#dolil">দলিল</a></li>
+        <li><a href="#mouza-map">মৌজা ম্যাপ</a></li>
+        <li><a href="#gallery">ম্যাপ গ্যালারি</a></li>
+        <li><a href="#faq">প্রশ্নোত্তর</a></li>
+      </ul>
     </nav>
+    <div class="head-btns">
+      <button class="icon-btn" id="themeBtn" type="button" aria-label="আলো বা অন্ধকার মোড বদলান" title="আলো / অন্ধকার">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>
+      </button>
+      <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="মেনু খুলুন" aria-expanded="false" aria-controls="nav">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
   </div>
 </header>
 
-<main id="top">
-  <div class="hero">
-    <div class="wrap">
-      <div>
-        <p class="kicker">কচুয়া · কারিগরপাড়া</p>
-        <h1>জমির কাগজ, পরিমাপ ও সরকারি সেবা এক জায়গায়</h1>
-        <p class="lead">খতিয়ান, পর্চা, নামজারি ও খাজনার অনলাইন সেবার লিংক, শতাংশ-কাঠা-বিঘার হিসাব এবং জমি কেনার আগে কী কী যাচাই করবেন তার তালিকা।</p>
-        <div class="hero-actions">
-          <a class="btn btn-clay" href="#calc">জমির হিসাব করুন</a>
-          <a class="btn btn-line" href="#buying">কেনার আগে যাচাই</a>
+<main>
+<!-- HERO SLIDER -->
+<section class="hero" id="home" aria-roledescription="স্লাইডার" aria-label="মূল বিষয়সমূহ">
+  <div class="hero-in">
+    <div class="slides" id="slides" aria-live="off">
+      <article class="slide on" data-label="১ / ৫">
+        <div>
+          <span class="kicker">কচুয়া কারিগরপাড়া গ্রাম</span>
+          <h1>আমাদের জমির কাগজ, সহজ বাংলায়</h1>
+          <p class="lead">খতিয়ান, নামজারি, দলিল আর মৌজা ম্যাপ। জমির এই চারটি কাগজ একসাথে কীভাবে কাজ করে, আসল ম্যাপের ছবি দেখে বুঝে নিন।</p>
+          <div class="cta"><a class="btn main" href="#chain">কীভাবে বুঝবেন</a><a class="btn ghost" href="#gallery">আসল ম্যাপ দেখুন</a></div>
         </div>
-      </div>
-      <svg class="plotmap" viewBox="0 0 440 340" role="img" aria-label="দাগ ও খতিয়ানসহ জমির নকশার চিত্র">
-        <rect x="10" y="10" width="420" height="320" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.5" stroke-width="2" stroke-dasharray="6 6"/>
-        <path d="M10 120 L170 100 L300 130 L430 90" fill="none" stroke="currentColor" stroke-opacity="0.4" stroke-width="6"/>
-        <polygon points="30,30 160,24 170,92 40,100" fill="#4d7c3a" fill-opacity="0.75" stroke="currentColor" stroke-width="1.5"/>
-        <polygon points="176,22 290,28 296,120 180,98" fill="#b5582f" fill-opacity="0.8" stroke="currentColor" stroke-width="1.5"/>
-        <polygon points="306,30 420,22 420,86 310,122" fill="#2f5b78" fill-opacity="0.9" stroke="currentColor" stroke-width="1.5"/>
-        <polygon points="30,140 190,150 180,310 30,300" fill="#d6b24a" fill-opacity="0.8" stroke="currentColor" stroke-width="1.5"/>
-        <polygon points="200,152 420,140 420,310 192,310" fill="#4d7c3a" fill-opacity="0.55" stroke="currentColor" stroke-width="1.5"/>
-        <g font-family="Hind Siliguri, sans-serif" font-size="16" font-weight="700" fill="#fff">
-          <text x="76" y="68">দাগ ১২</text>
-          <text x="208" y="68">দাগ ১৩</text>
-          <text x="340" y="70">দাগ ১৪</text>
-        </g>
-        <g font-family="Hind Siliguri, sans-serif" font-size="16" font-weight="700" fill="#1c2530">
-          <text x="84" y="232">দাগ ২১</text>
-        </g>
-        <g font-family="Hind Siliguri, sans-serif" font-size="16" font-weight="700" fill="#ffffff">
-          <text x="288" y="232">দাগ ২২</text>
-        </g>
-      </svg>
+        <figure class="plate"><img src="img/kachua-seat-1-thumb.jpg" alt="কচুয়া মৌজার সিট নং ১ ম্যাপ, প্রতিটি ঘর একেকটি দাগ" style="object-position:50% 52%" width="1000" height="1381"><figcaption>কচুয়া মৌজা, জে.এল. ১২৩, সিট নং ১। প্রতিটি ঘরে একটি দাগ নম্বর লেখা।</figcaption></figure>
+      </article>
+      <article class="slide" data-label="২ / ৫">
+        <div>
+          <span class="kicker">সার্ভে খতিয়ান</span>
+          <h1>খতিয়ান হলো জমির মালিকানার খাতা</h1>
+          <p class="lead">কোন দাগের জমি কার নামে, কতটুকু, কী ধরনের জমি, সবই খতিয়ানে লেখা থাকে। সিএস, এসএ, আরএস আর বিএস, প্রতিটি জরিপের খতিয়ান আলাদা।</p>
+          <div class="cta"><a class="btn main" href="#khatiyan">খতিয়ান শিখুন</a><a class="btn ghost" href="#links">অনলাইনে পর্চা</a></div>
+        </div>
+        <figure class="plate"><img src="img/arjunpara-seat-1-thumb.jpg" alt="অর্জুনপাড়া মৌজার সিট নং ১ ম্যাপ" width="1000" height="736"><figcaption>অর্জুনপাড়া মৌজা, জে.এল. ১২৪, সিট নং ১। ছোট ছোট ঘরে ঠাসা দাগ।</figcaption></figure>
+      </article>
+      <article class="slide" data-label="৩ / ৫">
+        <div>
+          <span class="kicker">নামজারি</span>
+          <h1>জমি কিনলে সরকারি খাতায় নাম তুলুন</h1>
+          <p class="lead">দলিল রেজিস্ট্রি হলেই কাজ শেষ নয়। নামজারি করলে খতিয়ানে আপনার নাম ওঠে, আর আপনি নিজের নামে খাজনা দিতে পারেন।</p>
+          <div class="cta"><a class="btn main" href="#namjari">ধাপগুলো দেখুন</a><a class="btn ghost" href="#faq">প্রশ্নোত্তর</a></div>
+        </div>
+        <figure class="plate"><img src="img/andi-thumb.jpg" alt="আন্দি মৌজার ম্যাপ" width="1000" height="736"><figcaption>আন্দি মৌজা, জে.এল. ৭২। চারপাশে পাশের মৌজার নাম লেখা।</figcaption></figure>
+      </article>
+      <article class="slide" data-label="৪ / ৫">
+        <div>
+          <span class="kicker">দলিল</span>
+          <h1>দলিল না বুঝে সই করবেন না</h1>
+          <p class="lead">সাফ কবলা, হেবা, বণ্টননামা। কোন দলিলে কী লেখা থাকে, কেনার আগে কী মিলিয়ে দেখবেন, তার একটি সহজ তালিকা এখানে পাবেন।</p>
+          <div class="cta"><a class="btn main" href="#dolil">দলিল সম্পর্কে জানুন</a><a class="btn ghost" href="#checklist">কেনার আগে যাচাই</a></div>
+        </div>
+        <figure class="plate"><img src="img/kachua-seat-2-thumb.jpg" alt="কচুয়া মৌজার সিট নং ২ ম্যাপ" style="object-position:50% 30%" width="1000" height="1363"><figcaption>কচুয়া মৌজা, জে.এল. ১২৩, সিট নং ২।</figcaption></figure>
+      </article>
+      <article class="slide" data-label="৫ / ৫">
+        <div>
+          <span class="kicker">মৌজা ম্যাপ</span>
+          <h1>ম্যাপের প্রতিটি দাগ আপনার জমির ঠিকানা</h1>
+          <p class="lead">স্কেল, সিট নম্বর, পাশের মৌজা আর সাংকেতিক চিহ্ন। ম্যাপের কোনটা কী, আসল ম্যাপের অংশ কেটে দেখানো হয়েছে।</p>
+          <div class="cta"><a class="btn main" href="#mouza-map">ম্যাপ পড়তে শিখুন</a><a class="btn ghost" href="#converter">জমির মাপ হিসাব</a></div>
+        </div>
+        <figure class="plate"><img src="img/arjunpara-seat-3-thumb.jpg" alt="অর্জুনপাড়া মৌজার সিট নং ৩ ম্যাপ" style="object-position:50% 40%" width="1000" height="1383"><figcaption>অর্জুনপাড়া মৌজা, জে.এল. ১২৪, সিট নং ৩।</figcaption></figure>
+      </article>
+    </div>
+    <div class="hero-ctl">
+      <button class="arrow" id="prev" type="button" aria-label="আগের স্লাইড"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <div class="dots" id="dots"></div>
+      <button class="arrow" id="next" type="button" aria-label="পরের স্লাইড"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+      <span class="sp"></span>
+      <button class="arrow" id="pause" type="button" aria-label="স্লাইড চলা থামান" aria-pressed="false"><svg id="pauseIc" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg></button>
     </div>
   </div>
+</section>
 
-  <section id="services">
-    <div class="wrap">
-      <div class="sec-head">
-        <p class="kicker">অনলাইন ভূমি সেবা</p>
-        <h2>অফিসে না গিয়ে যা করা যায়</h2>
-        <p>নিচের সেবাগুলো ভূমি মন্ত্রণালয়ের সরকারি ওয়েবসাইটে পাওয়া যায়। ব্যক্তিগত তথ্য শুধু সরকারি সাইটে দিন।</p>
-      </div>
-      <div class="svcs">
-        <article class="svc">
-          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 3h9l4 4v14H6zM14 3v5h5M9 13h6M9 17h6"/></svg>
-          <h3>ই-পর্চা (খতিয়ান)</h3>
-          <p>জমির খতিয়ান বা পর্চা অনলাইনে দেখা ও সার্টিফাইড কপির আবেদন।</p>
-          <a class="site" href="https://eporcha.gov.bd" target="_blank" rel="noopener">eporcha.gov.bd</a>
-        </article>
-        <article class="svc">
-          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg>
-          <h3>ই-নামজারি (মিউটেশন)</h3>
-          <p>জমি কেনা বা উত্তরাধিকারের পর নিজের নামে রেকর্ড করার আবেদন ও অবস্থা দেখা।</p>
-          <a class="site" href="https://mutation.land.gov.bd" target="_blank" rel="noopener">mutation.land.gov.bd</a>
-        </article>
-        <article class="svc">
-          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M7 15h4"/></svg>
-          <h3>ভূমি উন্নয়ন কর (খাজনা)</h3>
-          <p>অনলাইনে ভূমি উন্নয়ন কর পরিশোধ ও ডিসিআর রশিদ ডাউনলোড।</p>
-          <a class="site" href="https://ldtax.gov.bd" target="_blank" rel="noopener">ldtax.gov.bd</a>
-        </article>
-        <article class="svc">
-          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3l9 4-9 4-9-4zM3 12l9 4 9-4M3 17l9 4 9-4"/></svg>
-          <h3>ভূমি মন্ত্রণালয় পোর্টাল</h3>
-          <p>ভূমি সংক্রান্ত নোটিশ, আইন ও অন্যান্য সেবার তথ্য।</p>
-          <a class="site" href="https://minland.gov.bd" target="_blank" rel="noopener">minland.gov.bd</a>
-        </article>
-      </div>
+<!-- BIG PICTURE -->
+<section class="sec" id="chain">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">আগে বড় ছবিটা বুঝুন</div>
+      <h2>চারটি কাগজ, চারটি প্রশ্নের উত্তর</h2>
+      <p>বাড়ির ঠিকানা, মালিকের নাম, হাতবদলের প্রমাণ আর সরকারি খাতা। জমির কাগজও ঠিক তেমন। চারটি কাগজ মিলে একটি পুরো ছবি তৈরি করে।</p>
     </div>
-  </section>
+    <div class="chain">
+      <div class="link"><div class="q">কোথায়?</div><h3>মৌজা ম্যাপ</h3><p>জমিটি গ্রামের কোন জায়গায়, কোন দাগে, তার ছবি।</p></div>
+      <div class="link"><div class="q">কার?</div><h3>সার্ভে খতিয়ান</h3><p>ওই দাগের জমি জরিপের সময় কার নামে লেখা হয়েছিল।</p></div>
+      <div class="link"><div class="q">কীভাবে?</div><h3>দলিল</h3><p>বিক্রি, দান বা ভাগের মাধ্যমে জমি কীভাবে হাত বদলাল তার প্রমাণ।</p></div>
+      <div class="link"><div class="q">এখন কার?</div><h3>নামজারি</h3><p>হাত বদলের পর সরকারি খাতায় নতুন মালিকের নাম তোলা।</p></div>
+    </div>
 
-  <section id="calc" class="alt">
-    <div class="wrap conv">
+    <div class="nest" style="margin-top:56px">
       <div>
-        <p class="kicker">জমি পরিমাপ</p>
-        <h2 style="font-size:clamp(1.6rem,3.6vw,2.2rem);margin-top:6px">শতাংশ, কাঠা, বিঘার হিসাব</h2>
-        <p style="color:var(--muted);margin-top:10px">একটি এককে পরিমাণ লিখলেই সব এককে মান দেখাবে।</p>
-        <form class="form" id="convForm" style="margin-top:20px" onsubmit="return false">
-          <div>
-            <label for="amount">পরিমাণ</label>
-            <input id="amount" type="number" inputmode="decimal" min="0" step="any" value="5">
+        <div class="eyebrow">জমির ঠিকানা</div>
+        <h2 style="font-size:1.7rem;margin-bottom:10px">জেলা থেকে দাগ পর্যন্ত ধাপে ধাপে</h2>
+        <p>সব জমির ঠিকানা বড় থেকে ছোট দিকে নামে। ডাকঘরের ঠিকানার মতোই এখানেও জেলা, থানা, মৌজা, তারপর দাগ। দাগ নম্বর দিয়েই ম্যাপের জমির সাথে খতিয়ানের হিসাব মেলে।</p>
+        <p class="note" style="margin-top:14px">আসল ম্যাপে লেখা আছে <b>জিলা রাজশাহী</b>। তখন লালপুর থানা রাজশাহী জেলার অংশ ছিল। এখন লালপুর নাটোর জেলার উপজেলা। পুরনো কাগজ আর নতুন কাগজের নাম এ কারণেই আলাদা দেখায়।</p>
+      </div>
+      <div class="box" role="img" aria-label="জেলা, থানা, মৌজা, সিট এবং দাগের নেস্টেড চিত্র">
+        <span class="lab">জেলা <em>রাজশাহী (ম্যাপে লেখা)</em></span>
+        <div class="box"><span class="lab">থানা <em>লালপুর</em></span>
+          <div class="box"><span class="lab">মৌজা <em>কচুয়া, জে.এল. ১২৩</em></span>
+            <div class="box"><span class="lab">সিট <em>নং ১</em></span>
+              <div class="box plot"><span class="lab">দাগ নং <em style="color:#6a5a40">(ঘরের ভেতরের নম্বর)</em></span>
+                <div class="khat">এই দাগের মালিকের নাম আর জমির পরিমাণ <b>খতিয়ানে</b> লেখা থাকে।</div>
+              </div>
+            </div>
           </div>
-          <div>
-            <label for="unit">একক</label>
-            <select id="unit">
-              <option value="decimal">শতাংশ</option>
-              <option value="katha">কাঠা</option>
-              <option value="bigha">বিঘা</option>
-              <option value="acre">একর</option>
-              <option value="hectare">হেক্টর</option>
-              <option value="sqft">বর্গফুট</option>
-              <option value="sqm">বর্গমিটার</option>
-            </select>
-          </div>
-        </form>
-      </div>
-      <div>
-        <div class="results" id="results" aria-live="polite"></div>
-        <p class="note">ধরা হয়েছে: ১ শতাংশ = ৪৩৫.৬ বর্গফুট, ১ কাঠা = ৭২০ বর্গফুট, ১ বিঘা = ২০ কাঠা, ১ একর = ১০০ শতাংশ। কাঠা ও বিঘার মাপ এলাকাভেদে আলাদা হয়। দলিলের মাপই চূড়ান্ত, লেনদেনের আগে সার্ভেয়ারকে দিয়ে মাপিয়ে নিন।</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="buying">
-    <div class="wrap">
-      <div class="sec-head">
-        <p class="kicker">জমি কেনার আগে</p>
-        <h2>যাচাইয়ের তালিকা</h2>
-        <p>প্রতিটি কাগজ দেখা হলে টিক দিন। এই তালিকা শুধু আপনার ব্রাউজারে থাকে, সংরক্ষিত হয় না।</p>
-      </div>
-      <p class="progress" id="progress" aria-live="polite"></p>
-      <ul class="checks" id="checks">
-        <li><input type="checkbox" id="c1"><label for="c1"><h3>মূল দলিল ও বায়া দলিল</h3><p>বিক্রেতার মালিকানার ধারাবাহিক দলিল ৩০ বছর পর্যন্ত যাচাই করুন।</p></label></li>
-        <li><input type="checkbox" id="c2"><label for="c2"><h3>এস এ, আর এস ও বিএস খতিয়ান</h3><p>দাগ নম্বর ও খতিয়ানের মালিকের নাম দলিলের সাথে মেলান।</p></label></li>
-        <li><input type="checkbox" id="c3"><label for="c3"><h3>নামজারি ও পর্চা</h3><p>বিক্রেতার নামে নামজারি হয়েছে কি না এবং সর্বশেষ পর্চায় নাম আছে কি না দেখুন।</p></label></li>
-        <li><input type="checkbox" id="c4"><label for="c4"><h3>খাজনার হালনাগাদ রশিদ</h3><p>চলতি বছর পর্যন্ত ভূমি উন্নয়ন কর পরিশোধ হয়েছে কি না নিশ্চিত হন।</p></label></li>
-        <li><input type="checkbox" id="c5"><label for="c5"><h3>উত্তরাধিকারীদের সম্মতি</h3><p>বিক্রেতার অন্য ওয়ারিশ থাকলে সবার সম্মতি ও স্বাক্ষর আছে কি না দেখুন।</p></label></li>
-        <li><input type="checkbox" id="c6"><label for="c6"><h3>মামলা ও বন্ধক যাচাই</h3><p>জমিতে মামলা, ঋণ বা বন্ধক আছে কি না সাব-রেজিস্ট্রি ও এলাকার প্রবীণদের কাছে খোঁজ নিন।</p></label></li>
-        <li><input type="checkbox" id="c7"><label for="c7"><h3>সরেজমিনে সীমানা দেখা</h3><p>সার্ভেয়ার নিয়ে জমি মাপুন এবং আশপাশের জমির মালিকদের সাথে কথা বলুন।</p></label></li>
-        <li><input type="checkbox" id="c8"><label for="c8"><h3>রেজিস্ট্রেশন ও খরচ</h3><p>সাব-রেজিস্ট্রি অফিসে রেজিস্ট্রি, স্ট্যাম্প ও কর বাবদ সরকারি ফি হিসাব করে রাখুন।</p></label></li>
-      </ul>
-    </div>
-  </section>
-
-  <section id="caution" class="alt">
-    <div class="wrap">
-      <div class="sec-head">
-        <p class="kicker">সতর্কতা</p>
-        <h2>প্রতারণা এড়াতে মনে রাখুন</h2>
-      </div>
-      <div class="caution">
-        <article class="warn"><h3>বায়নার আগে কাগজ দেখুন</h3><p>পুরো কাগজ যাচাই না করে অগ্রিম টাকা দেবেন না। বায়নাও লিখিত ও সাক্ষীসহ করুন।</p></article>
-        <article class="warn"><h3>নগদ লেনদেন এড়ান</h3><p>বড় অঙ্কের টাকা ব্যাংকের মাধ্যমে দিন এবং প্রাপ্তিস্বীকার রাখুন।</p></article>
-        <article class="warn"><h3>একই জমি দুইবার বিক্রি</h3><p>রেজিস্ট্রির আগে সাব-রেজিস্ট্রি অফিসে অন্য কোনো দলিল হয়েছে কি না খোঁজ নিন।</p></article>
-        <article class="warn"><h3>দালালের কথায় নির্ভর নয়</h3><p>কাগজের সত্যতা নিজে বা আইনজীবীর মাধ্যমে যাচাই করুন, মুখের কথায় নয়।</p></article>
-      </div>
-      <p class="note">এই পাতা সাধারণ তথ্য দেয়, আইনি পরামর্শ নয়। বড় লেনদেনের আগে অভিজ্ঞ ভূমি আইনজীবীর সাথে কথা বলুন।</p>
-    </div>
-  </section>
-
-  <section id="contact" class="band">
-    <div class="wrap cols">
-      <div>
-        <p class="kicker">সরকারি সহায়তা</p>
-        <h2>ভূমি নিয়ে প্রশ্ন বা অভিযোগ থাকলে</h2>
-        <p>ভূমি সংক্রান্ত সেবা ও অভিযোগের জন্য ভূমি মন্ত্রণালয়ের হটলাইনে ফোন করতে পারেন। সরাসরি সহায়তার জন্য ইউনিয়ন ভূমি অফিস বা উপজেলা ভূমি অফিসে যান।</p>
-        <div class="helpline">
-          <div><span>ভূমি মন্ত্রণালয় হটলাইন</span><br><b>১৬১২২</b></div>
-          <span>দেশের যেকোনো মোবাইল থেকে</span>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- KHATIYAN -->
+<section class="sec alt" id="khatiyan">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">সার্ভে খতিয়ান</div>
+      <h2>খতিয়ান কী, কেন এত জরুরি</h2>
+      <p>খতিয়ান হলো মালিকের নামে সাজানো জমির খাতা। এক খতিয়ানে এক বা একাধিক দাগের জমি থাকতে পারে। জমি কেনা, বিক্রি, ঋণ আর মামলায় সবচেয়ে বেশি এই কাগজই দেখতে হয়।</p>
+    </div>
+
+    <h3 style="margin-bottom:6px">জরিপ কতবার হয়েছে</h3>
+    <p style="color:var(--muted)">একই জমির জন্য বিভিন্ন সময়ের খতিয়ান পাওয়া যায়। নিচের রেখায় বছর অনুযায়ী জায়গা বসানো হয়েছে। আমাদের ম্যাপে লেখা বছর ১৯১০-১৫ আর ১৯৬৬-৭৭।</p>
+    <div class="axis" id="axis" aria-label="জরিপের সময়রেখা"></div>
+    <div class="ticks" aria-hidden="true"><span>১৯০০</span><span>১৯৩০</span><span>১৯৬০</span><span>১৯৯০</span><span>২০২৬</span></div>
+
+    <div class="grid g2" style="margin-top:40px;align-items:start">
       <div>
-        <p class="kicker">স্থানীয় যোগাযোগ</p>
-        <h2>কারিগরপাড়া ভূমি সহায়তা</h2>
-        <ul class="contact-list">
-          <li><span>ঠিকানা</span><b>কারিগরপাড়া, কচুয়া</b></li>
-          <li><span>ইউনিয়ন ভূমি অফিস</span><b>ইউনিয়ন পরিষদ কমপ্লেক্স</b></li>
-          <li><span>উপজেলা ভূমি অফিস</span><b>কচুয়া উপজেলা সদর</b></li>
-          <li><span>ফোন</span><b>০১XXX-XXXXXX</b></li>
+        <div class="tabs" role="tablist" aria-label="জরিপের ধরন">
+          <button class="tab" role="tab" aria-selected="true" aria-controls="p-cs" id="t-cs" type="button">সিএস</button>
+          <button class="tab" role="tab" aria-selected="false" aria-controls="p-sa" id="t-sa" type="button">এসএ</button>
+          <button class="tab" role="tab" aria-selected="false" aria-controls="p-rs" id="t-rs" type="button">আরএস</button>
+          <button class="tab" role="tab" aria-selected="false" aria-controls="p-bs" id="t-bs" type="button">বিএস</button>
+        </div>
+        <div class="card panel" role="tabpanel" id="p-cs" aria-labelledby="t-cs"><h3>সিএস (ক্যাডাস্ট্রাল সার্ভে)</h3><p>ব্রিটিশ আমলের প্রথম পূর্ণাঙ্গ জরিপ। এই এলাকার ম্যাপে লেখা আছে ১৯১০-১৫ সনে সরকারি ক্ষমতায় তৈরি। মালিকানার মূল সূত্র খুঁজতে সিএস খতিয়ান সবার আগে দেখা হয়।</p></div>
+        <div class="card panel" role="tabpanel" id="p-sa" aria-labelledby="t-sa" hidden><h3>এসএ (স্টেট অ্যাকুইজিশন)</h3><p>১৯৫০ সালের রাষ্ট্রীয় অধিগ্রহণ ও প্রজাস্বত্ব আইনের পর হওয়া জরিপ। জমিদারি ব্যবস্থা শেষ হওয়ার পর প্রজারা সরাসরি সরকারের প্রজা হিসেবে লেখা হন।</p></div>
+        <div class="card panel" role="tabpanel" id="p-rs" aria-labelledby="t-rs" hidden><h3>আরএস (রিভিশনাল সার্ভে)</h3><p>আগের জরিপের পর বদলে যাওয়া মালিকানা হালনাগাদ করার জরিপ। আমাদের ম্যাপে ১৯৬৬-৭৭ সনে প্রস্তুত লেখা, আর সিলমোহরে আছে "১৯৫০ সালের আইনের চতুর্থ অধ্যায় অনুযায়ী কাজের জন্য গৃহীত"।</p></div>
+        <div class="card panel" role="tabpanel" id="p-bs" aria-labelledby="t-bs" hidden><h3>বিএস (বাংলাদেশ জরিপ)</h3><p>সবচেয়ে নতুন জরিপ, যা ২০০০-এর দশক থেকে বিভিন্ন এলাকায় চলছে এবং ডিজিটাল পদ্ধতিতে হচ্ছে। আপনার মৌজায় বিএস হয়েছে কি না, তা উপজেলা ভূমি অফিসে জেনে নিন।</p></div>
+        <p class="note warn">নামজারির পর পাওয়া খতিয়ানকে বলা হয় মিউটেশন খতিয়ান বা পর্চা। এটি জরিপের খতিয়ান থেকে আলাদা, তাই কাগজে কোন ধরনের খতিয়ান দেখছেন তা সবসময় মিলিয়ে নিন।</p>
+      </div>
+      <div>
+        <div class="sheet-wrap">
+          <div class="sheet" aria-label="কাল্পনিক খতিয়ানের নমুনা">
+            <span class="fl">কাল্পনিক নমুনা</span>
+            <h4>খতিয়ান নং ১২৩ (উদাহরণ)</h4>
+            <table>
+              <tr><th><span class="cal">১</span>জেলা / থানা</th><td>রাজশাহী / লালপুর</td></tr>
+              <tr><th><span class="cal">২</span>মৌজা, জে.এল.</th><td>কচুয়া, ১২৩</td></tr>
+              <tr><th><span class="cal">৩</span>মালিকের নাম</th><td>আবদুল করিম, পিতা রহিম উদ্দিন</td></tr>
+              <tr><th><span class="cal">৪</span>অংশ</th><td>১৬ আনা (পূর্ণ মালিক)</td></tr>
+              <tr><th><span class="cal">৫</span>দাগ নং ও শ্রেণি</th><td>৪৫২, ধানি</td></tr>
+              <tr><th><span class="cal">৬</span>জমির পরিমাণ</th><td>৩৩ শতাংশ</td></tr>
+            </table>
+          </div>
+        </div>
+        <ul class="how" style="margin-top:18px">
+          <li><span class="cal">১</span><div><b>ঠিকানা</b> মিলিয়ে নিন। ভুল মৌজার খতিয়ান দেখলে পুরো হিসাব ভুল হবে।</div></li>
+          <li><span class="cal">৩</span><div><b>মালিকের নাম ও পিতার নাম</b> দলিলের বিক্রেতার সাথে হুবহু মেলাতে হবে।</div></li>
+          <li><span class="cal">৪</span><div><b>অংশ</b> দেখুন। একাধিক মালিক থাকলে প্রত্যেকের অংশ আলাদা লেখা থাকে।</div></li>
+          <li><span class="cal">৫</span><div><b>দাগ নম্বর</b> ম্যাপের ঘরের নম্বরের সাথে মেলে। জমির শ্রেণি যেমন ধানি, ভিটা বা পুকুর, এখানেই লেখা।</div></li>
+          <li><span class="cal">৬</span><div><b>পরিমাণ</b> সাধারণত শতাংশ বা একরে। দলিলের পরিমাণের সাথে মিলিয়ে নিন।</div></li>
         </ul>
-        <p>নম্বর ও ঠিকানা সঠিক তথ্য দিয়ে বদলে নিন।</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
+<!-- NAMJARI -->
+<section class="sec" id="namjari">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">নামজারি (মিউটেশন)</div>
+      <h2>দলিল হলো, এবার সরকারি খাতায় নাম তুলুন</h2>
+      <p>দলিল প্রমাণ করে আপনি জমি কিনেছেন। কিন্তু সরকারের খতিয়ানে তখনও আগের মালিকের নামই থাকে। নামজারি করলে সেই খাতা বদলে আপনার নাম বসে।</p>
+    </div>
+
+    <div class="ba" role="group" aria-label="নামজারির আগে ও পরে">
+      <div class="side">
+        <h3 style="margin-bottom:8px">নামজারির আগে</h3>
+        <div class="row"><span>দলিলে মালিক</span><b>ক্রেতা (আপনি)</b></div>
+        <div class="row"><span>সরকারি খতিয়ানে মালিক</span><b class="bad">বিক্রেতা</b></div>
+        <div class="row"><span>নিজের নামে খাজনা</span><b class="bad">দেওয়া কঠিন</b></div>
+        <div class="row"><span>আবার বিক্রি বা ঋণ</span><b class="bad">জটিলতা হয়</b></div>
+      </div>
+      <div class="mid"><div><i>→</i>নামজারি</div></div>
+      <div class="side after">
+        <h3 style="margin-bottom:8px">নামজারির পরে</h3>
+        <div class="row"><span>দলিলে মালিক</span><b>ক্রেতা (আপনি)</b></div>
+        <div class="row"><span>সরকারি খতিয়ানে মালিক</span><b class="good">আপনি</b></div>
+        <div class="row"><span>নিজের নামে খাজনা</span><b class="good">দেওয়া যায়</b></div>
+        <div class="row"><span>আবার বিক্রি বা ঋণ</span><b class="good">সহজ হয়</b></div>
+      </div>
+    </div>
+
+    <div class="grid g2" style="margin-top:48px;align-items:start">
+      <div>
+        <h3 style="margin-bottom:16px;font-size:1.4rem">আবেদনের ধাপ</h3>
+        <ol class="steps">
+          <li><span class="n">১</span><div><h4>কাগজ গোছান</h4><p>দলিলের কপি, খতিয়ান বা পর্চা, হালনাগাদ খাজনার রসিদ, জাতীয় পরিচয়পত্র আর ছবি।</p></div></li>
+          <li><span class="n">২</span><div><h4>আবেদন করুন</h4><p>অনলাইনে mutation.land.gov.bd সাইটে, অথবা ইউনিয়ন ভূমি অফিস ও ডিজিটাল সেন্টারের সাহায্যে।</p></div></li>
+          <li><span class="n">৩</span><div><h4>সরকারি ফি দিন</h4><p>ফি অনলাইনে জমা হয়। আবেদনের সময় সাইটে যে পরিমাণ দেখাবে সেটাই দেবেন, কারও হাতে বাড়তি টাকা নয়।</p></div></li>
+          <li><span class="n">৪</span><div><h4>তদন্ত ও নোটিশ</h4><p>ভূমি অফিস জমি ও কাগজ যাচাই করে। সংশ্লিষ্ট সবাইকে নোটিশ দেওয়া হয়।</p></div></li>
+          <li><span class="n">৫</span><div><h4>শুনানি</h4><p>সহকারী কমিশনার (ভূমি) শুনানি নেন। কারও আপত্তি থাকলে এখানেই জানানো যায়।</p></div></li>
+          <li><span class="n">৬</span><div><h4>অনুমোদন ও নতুন খতিয়ান</h4><p>আবেদন মঞ্জুর হলে আপনার নামে নতুন খতিয়ান তৈরি হয়।</p></div></li>
+          <li><span class="n">৭</span><div><h4>ডিসিআর ও পর্চা নিন</h4><p>ডিসিআর (খাজনার রসিদ) আর নতুন পর্চা সংগ্রহ করুন। এরপর প্রতি বছর নিজের নামে খাজনা দিন।</p></div></li>
+        </ol>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom:18px">
+          <h3>কতদিন লাগে</h3>
+          <p style="margin-bottom:10px;color:var(--muted)">সরকারের নির্ধারিত সময়সীমা সর্বোচ্চ ২৮ দিন। নিয়ম বদলাতে পারে, তাই আবেদনের সময় অনলাইনে দেখা সময়টিই ধরুন।</p>
+          <div class="bar-lab" style="margin:0 0 4px"><span>আবেদন</span><span>সর্বোচ্চ ২৮ দিন</span></div>
+          <div class="bar" aria-hidden="true" style="height:22px"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        </div>
+        <div class="card" style="margin-bottom:18px">
+          <h3>কোন কোন কারণে নামজারি হয়</h3>
+          <dl class="types" style="margin:8px 0 0">
+            <dt>কেনা (সাফ কবলা দলিল)</dt><dd>রেজিস্ট্রি দলিল দিয়ে আবেদন।</dd>
+            <dt>উত্তরাধিকার</dt><dd>মালিক মারা গেলে ওয়ারিশদের আবেদন। ওয়ারিশ সনদ লাগে।</dd>
+            <dt>দান বা হেবা</dt><dd>রেজিস্ট্রি করা হেবা দলিল দিয়ে।</dd>
+            <dt>আদালতের রায়</dt><dd>রায় বা ডিক্রির কপি জমা দিয়ে।</dd>
+          </dl>
+        </div>
+        <p class="note warn">নামজারির জন্য কাউকে বাড়তি টাকা দেবেন না। কোনো সমস্যা হলে উপজেলা ভূমি অফিসে বা অনলাইনে অভিযোগ জানান।</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOLIL -->
+<section class="sec alt" id="dolil">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">দলিল</div>
+      <h2>দলিল মানে জমি হাত বদলের প্রমাণ</h2>
+      <p>জমি বিক্রি, দান বা ভাগ করলে তা লিখে সাব-রেজিস্ট্রি অফিসে নিবন্ধন করতে হয়। নিবন্ধিত দলিলই আইনের চোখে সবচেয়ে শক্ত প্রমাণ।</p>
+    </div>
+    <div class="dolil">
+      <div>
+        <div class="card">
+          <h3 style="margin-bottom:10px">প্রচলিত দলিলের ধরন</h3>
+          <dl class="types" style="margin:0">
+            <dt>সাফ কবলা দলিল</dt><dd>জমি বিক্রির দলিল। ক্রেতা পূর্ণ মালিকানা পান।</dd>
+            <dt>হেবা দলিল</dt><dd>দান করার দলিল। বিনিময়ে টাকা নেওয়া হয় না।</dd>
+            <dt>বণ্টননামা</dt><dd>শরিকদের মধ্যে জমি ভাগ করে নেওয়ার দলিল।</dd>
+            <dt>এওয়াজ বা বিনিময়</dt><dd>একজনের জমির সাথে আরেকজনের জমি বদল।</dd>
+            <dt>মোক্তারনামা (পাওয়ার অব অ্যাটর্নি)</dt><dd>অন্য কাউকে জমির কাজ করার ক্ষমতা দেওয়া। এতে মালিকানা বদলায় না।</dd>
+            <dt>অছিয়তনামা (উইল)</dt><dd>মৃত্যুর পর জমি কে পাবেন তার লিখিত ইচ্ছা।</dd>
+          </dl>
+        </div>
+        <h3 style="margin:30px 0 14px">রেজিস্ট্রির পথ</h3>
+        <ol class="steps">
+          <li><span class="n">১</span><div><h4>দলিল লেখা</h4><p>দলিল লেখকের মাধ্যমে তফসিল, চৌহদ্দি, দাম লিখে নিন।</p></div></li>
+          <li><span class="n">২</span><div><h4>সাব-রেজিস্ট্রি অফিসে যাওয়া</h4><p>দাতা, গ্রহীতা ও সাক্ষী নিজে উপস্থিত থাকেন। পরিচয় যাচাই, ছবি ও আঙুলের ছাপ নেওয়া হয়।</p></div></li>
+          <li><span class="n">৩</span><div><h4>সরকারি খরচ জমা</h4><p>জমির দাম ও এলাকা অনুযায়ী স্ট্যাম্প ও ফি লাগে। হার সাব-রেজিস্ট্রি অফিসে জেনে নিন।</p></div></li>
+          <li><span class="n">৪</span><div><h4>দলিল সম্পন্ন, নামজারি শুরু</h4><p>দলিলের কপি হাতে পেয়ে নামজারির আবেদন করুন।</p></div></li>
+        </ol>
+      </div>
+      <div>
+        <div class="sheet">
+          <span class="fl">কাল্পনিক নমুনা</span>
+          <h4>সাফ কবলা দলিল (উদাহরণ)</h4>
+          <table>
+            <tr><th><span class="cal">১</span>দলিল নং ও সন</th><td>৯৮৭৬ / ২০২৬</td></tr>
+            <tr><th><span class="cal">২</span>দাতা ও গ্রহীতা</th><td>বিক্রেতা: আবদুল করিম<br>ক্রেতা: সালমা বেগম</td></tr>
+            <tr><th><span class="cal">৩</span>তফসিল</th><td>থানা লালপুর, মৌজা কচুয়া, জে.এল. ১২৩, খতিয়ান ১২৩, দাগ ৪৫২, ৩৩ শতাংশ</td></tr>
+            <tr><th><span class="cal">৪</span>দাম</th><td>টাকা ... (কথায় ও অঙ্কে)</td></tr>
+            <tr><th><span class="cal">৫</span>চৌহদ্দি</th><td>উত্তরে রাস্তা, দক্ষিণে খাল, পূর্বে ও পশ্চিমে অন্যের জমি</td></tr>
+            <tr><th><span class="cal">৬</span>মালিকানার সূত্র</th><td>বিক্রেতা আগের কোন দলিল বা উত্তরাধিকারে জমি পেয়েছেন</td></tr>
+          </table>
+        </div>
+        <ul class="how" style="margin-top:18px">
+          <li><span class="cal">৩</span><div><b>তফসিল</b> সবচেয়ে গুরুত্বপূর্ণ অংশ। মৌজা, দাগ ও পরিমাণ ম্যাপ আর খতিয়ানের সাথে হুবহু মিলতে হবে।</div></li>
+          <li><span class="cal">৫</span><div><b>চৌহদ্দি</b> চার দিকে কী আছে লেখা থাকে। সরেজমিনে গিয়ে নিজের চোখে মিলিয়ে নিন।</div></li>
+          <li><span class="cal">৬</span><div><b>মালিকানার সূত্র</b> দেখে আগের দলিল বা খতিয়ান চেয়ে নিন। এটাই বিক্রেতার মালিকানার ধারা প্রমাণ করে।</div></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="chk" id="checklist" style="margin-top:56px">
+      <div>
+        <h3 style="font-size:1.5rem;margin-bottom:6px">জমি কেনার আগে ৮টি যাচাই</h3>
+        <p style="color:var(--muted);margin-bottom:16px">একটি একটি করে টিক দিন। সব ঘর টিক হলে ঝুঁকি অনেক কমে।</p>
+        <ul id="chkList">
+          <li><label><input type="checkbox"><span><b>বিক্রেতার পরিচয়:</b> জাতীয় পরিচয়পত্রের নাম খতিয়ান ও দলিলের নামের সাথে মেলান।</span></label></li>
+          <li><label><input type="checkbox"><span><b>হালনাগাদ খতিয়ান:</b> অনলাইনে বা ভূমি অফিসে সর্বশেষ পর্চা বের করুন।</span></label></li>
+          <li><label><input type="checkbox"><span><b>ম্যাপ ও দাগ নম্বর:</b> দাগ নম্বর ও পরিমাণ মৌজা ম্যাপের সাথে মেলান।</span></label></li>
+          <li><label><input type="checkbox"><span><b>সরেজমিনে সীমানা:</b> জমিতে গিয়ে চৌহদ্দি ও দখল নিজে দেখুন, প্রতিবেশীদের জিজ্ঞেস করুন।</span></label></li>
+          <li><label><input type="checkbox"><span><b>আগের দলিলের ধারা:</b> বিক্রেতার আগের দলিলগুলো পরপর মিলিয়ে দেখুন।</span></label></li>
+          <li><label><input type="checkbox"><span><b>খাজনার রসিদ:</b> সর্বশেষ বছর পর্যন্ত ভূমি উন্নয়ন কর পরিশোধের রসিদ দেখুন।</span></label></li>
+          <li><label><input type="checkbox"><span><b>ঝামেলা আছে কি না:</b> মামলা, বন্ধক, ঋণ বা সরকারি সম্পত্তির জটিলতা জেনে নিন।</span></label></li>
+          <li><label><input type="checkbox"><span><b>সব শরিকের সম্মতি:</b> ওয়ারিশ বা শরিক থাকলে সবাই দলিলে সম্মতি দিয়েছেন কি না দেখুন।</span></label></li>
+        </ul>
+      </div>
+      <div class="stick">
+        <div class="ring" id="ring" role="img" aria-label="যাচাই অগ্রগতি"><div><span id="ringN">০/৮</span><small>যাচাই হয়েছে</small></div></div>
+      </div>
+    </div>
+    <p class="note warn">বড় অঙ্কের জমি কেনার আগে অভিজ্ঞ দলিল লেখক বা আইনজীবীর পরামর্শ নিন। এই সাইট শুধু সাধারণ ধারণা দেয়।</p>
+  </div>
+</section>
+
+<!-- MOUZA MAP -->
+<section class="sec" id="mouza-map">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">মৌজা ম্যাপ</div>
+      <h2>আসল ম্যাপ দেখে ম্যাপ পড়তে শিখুন</h2>
+      <p>মৌজা ম্যাপ হলো পুরো মৌজার জমির নকশা। প্রতিটি ঘর একেকটি দাগ। নিচের ম্যাপটি কচুয়া মৌজার আসল ম্যাপ। লাল ঘরে চাপ দিলে সেই অংশ কী বোঝায় জানতে পারবেন।</p>
+    </div>
+
+    <div class="explorer">
+      <div class="mapbox" id="mapbox"><img src="img/kachua-seat-1-full.jpg" alt="কচুয়া মৌজা সিট নং ১ ম্যাপ, লাল ঘর দিয়ে অংশ চিহ্নিত" width="2400" height="3315" loading="lazy"></div>
+      <div>
+        <ul class="picklist" id="picks"></ul>
+        <div class="card info" id="info" aria-live="polite"></div>
+      </div>
+    </div>
+
+    <h3 style="margin:56px 0 16px;font-size:1.5rem">ম্যাপের ছোট ছোট অংশ, আসল ছবিতে</h3>
+    <div class="grid g3 parts">
+      <figure class="card"><div class="shot"><img src="img/crop-title.jpg" alt="ম্যাপের শিরোনাম অংশ" loading="lazy"></div><figcaption><b>শিরোনাম ও স্কেল</b>জেলা, থানা, মৌজা, জে.এল. নম্বর আর সিট নম্বর এখানে লেখা। স্কেল লেখা ১৬ ইঞ্চি = ১ মাইল।</figcaption></figure>
+      <figure class="card"><div class="shot"><img src="img/crop-plots.jpg" alt="ম্যাপের দাগ নম্বর" loading="lazy"></div><figcaption><b>দাগ নম্বর</b>কালো রেখায় ঘেরা প্রতিটি ঘরে মোটা অক্ষরে দাগ নম্বর লেখা। এই নম্বর দিয়েই খতিয়ান খুঁজতে হয়।</figcaption></figure>
+      <figure class="card"><div class="shot"><img src="img/crop-legend.jpg" alt="সাংকেতিক চিহ্নের বাক্স" loading="lazy"></div><figcaption><b>সাংকেতিক বাক্স</b>দালান, পিলার, নলকূপ, রাস্তা, খাল ইত্যাদির চিহ্ন এখানে বোঝানো আছে।</figcaption></figure>
+      <figure class="card"><div class="shot"><img src="img/crop-table.jpg" alt="মৌজার নামের সারণি" loading="lazy"></div><figcaption><b>পুরনো ও নতুন জে.এল.</b>আগের জে.এল. নম্বর আর নতুন নম্বর পাশাপাশি লেখা, যেমন কচুয়া ৯০ থেকে ১২৩। দলিলে যেকোনো একটি থাকতে পারে।</figcaption></figure>
+      <figure class="card"><div class="shot"><img src="img/crop-stamp.jpg" alt="সিলমোহর" loading="lazy"></div><figcaption><b>সিলমোহর</b>জরিপ কর্মকর্তার সিল। এটি প্রমাণ করে ম্যাপটি সরকারিভাবে গৃহীত।</figcaption></figure>
+      <div class="card" style="display:flex;flex-direction:column;justify-content:center">
+        <h3>পাশের মৌজার নাম</h3>
+        <p style="margin:0;color:var(--muted)">ম্যাপের চার দিকের কিনারায় পাশের মৌজার নাম ও নম্বর লেখা থাকে। যেমন কচুয়ার পাশে সুন্দরগাড়া, অর্জুনপাড়া আর নওদাপাড়া। তাই জমির ঠিকানা মেলাতে সুবিধা হয়।</p>
+      </div>
+    </div>
+
+    <div class="grid g2" style="margin-top:56px;align-items:start">
+      <div class="card scale">
+        <div>
+          <h3 style="margin-bottom:4px">ম্যাপের মাপ কীভাবে বোঝেন</h3>
+          <p style="color:var(--muted);margin:0">ম্যাপে লেখা: ১৬ ইঞ্চি = ১ মাইল। ১০০ কড়িতে ১ জরীপ (চেইন), ৮০ জরীপে ১ মাইল।</p>
+        </div>
+        <div>
+          <div class="bar" role="img" aria-label="ম্যাপের ১ ইঞ্চি সমান মাঠের ৫ চেইন"><i></i><i></i><i></i><i></i><i></i></div>
+          <div class="bar-lab"><span>ম্যাপে ১ ইঞ্চি</span><span>মাঠে ৫ চেইন = ৩৩০ ফুট</span></div>
+        </div>
+        <div class="eq"><span>১ চেইন = ১০০ লিংক = ৬৬ ফুট</span><em>×</em><span>৮০ চেইন = ১ মাইল</span></div>
+        <p style="margin:0;color:var(--muted);font-size:.95rem">আপনি যদি ম্যাপে এক ইঞ্চি মাপেন, মাঠে তা প্রায় ৩৩০ ফুট। তবে ছাপা বা স্ক্যান করা ছবি ছোট বড় হলে এই হিসাব ঠিক থাকে না। সঠিক মাপের জন্য সরকারি সার্ভেয়ারের সাহায্য নিন।</p>
+      </div>
+      <div>
+        <h3 style="margin-bottom:12px">সাংকেতিক চিহ্ন</h3>
+        <div class="legend" id="legend"></div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:40px" id="converter">
+      <h3 style="margin-bottom:4px">জমির মাপ রূপান্তর</h3>
+      <p style="color:var(--muted)">খতিয়ানে শতাংশ বা একর, দলিলে কখনও কাঠা বা বিঘা লেখা থাকে। সংখ্যা বসান, সব মাপ একসাথে দেখুন।</p>
+      <div class="conv">
+        <div>
+          <label for="cv" style="font-weight:600">পরিমাণ</label>
+          <input id="cv" type="number" inputmode="decimal" min="0" step="any" value="33">
+          <label for="cu" style="font-weight:600">একক</label>
+          <select id="cu">
+            <option value="435.6" selected>শতাংশ</option>
+            <option value="43560">একর</option>
+            <option value="14374.8">বিঘা (৩৩ শতাংশ ধরে)</option>
+            <option value="720">কাঠা (৭২০ বর্গফুট)</option>
+            <option value="1">বর্গফুট</option>
+          </select>
+          <span class="tag">বিঘা ও কাঠার মাপ এলাকাভেদে আলাদা হতে পারে</span>
+        </div>
+        <div class="out" id="out"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="sec alt" id="gallery">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">ম্যাপ গ্যালারি</div>
+      <h2>আমাদের এলাকার আসল ম্যাপ</h2>
+      <p>যেকোনো ম্যাপে চাপ দিয়ে বড় করে দেখুন। বড় পর্দায় + বোতামে জুম করে দাগ নম্বর পড়া যায়।</p>
+    </div>
+    <div class="gal" id="gal"></div>
+    <p class="note">এই ম্যাপগুলো ঐতিহাসিক জরিপের নকল। জমি কেনাবেচা বা মামলার কাজে সরকারি সত্যায়িত নকল জেলা রেকর্ড রুম থেকে নিতে হবে।</p>
+  </div>
+</section>
+
+<!-- FAQ + LINKS -->
+<section class="sec" id="faq">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">প্রশ্নোত্তর</div>
+      <h2>গ্রামের মানুষের সাধারণ প্রশ্ন</h2>
+    </div>
+    <div style="max-width:820px">
+      <details><summary>আমার জমির খতিয়ান কীভাবে বের করব?</summary><div>প্রথমে মৌজার নাম, জে.এল. নম্বর আর দাগ নম্বর জানতে হবে। তারপর অনলাইনে ই-পর্চা সাইটে, ইউনিয়ন ভূমি অফিসে বা ডিজিটাল সেন্টারে খুঁজে বের করা যায়। পুরনো সিএস, এসএ, আরএসের নকলের জন্য জেলা রেকর্ড রুমে আবেদন করতে হয়।</div></details>
+      <details><summary>দলিলের নাম আর খতিয়ানের নাম না মিললে কী করব?</summary><div>নাম বা বানানের ভুল থাকলে আগে তা শুদ্ধ করুন। এ জন্য ভূমি অফিসে সংশোধনের আবেদন বা আদালতের মাধ্যমে ব্যবস্থা নিতে হতে পারে। না মিলিয়ে জমি কিনবেন না।</div></details>
+      <details><summary>নামজারি না করলে কি জমি আমার থাকে না?</summary><div>নিবন্ধিত দলিল থাকলে মালিকানার প্রমাণ আপনার আছে। কিন্তু নামজারি না করলে সরকারি খাতায় নাম ওঠে না। তাতে নিজের নামে খাজনা দিতে, ঋণ নিতে বা আবার বিক্রি করতে ঝামেলা হয়। তাই কেনার পর যত দ্রুত সম্ভব নামজারি করুন।</div></details>
+      <details><summary>দাগ নম্বর আর খতিয়ান নম্বর কি একই?</summary><div>না। দাগ নম্বর হলো ম্যাপে জমির টুকরার নম্বর। খতিয়ান নম্বর হলো মালিকের নামের হিসাবের নম্বর। এক খতিয়ানে অনেক দাগ থাকতে পারে, আবার এক দাগে একাধিক খতিয়ান থাকতে পারে।</div></details>
+      <details><summary>একই মৌজার ম্যাপ কেন কয়েকটি সিটে ভাগ করা?</summary><div>বড় মৌজা এক কাগজে ধরে না। তাই সেটি কয়েকটি সিটে ভাগ করা হয়। আমাদের ম্যাপে কচুয়ার দুটি সিট আর অর্জুনপাড়ার তিনটি সিট আছে। সিটের কিনারায় লেখা থাকে পাশের সিট কোনটি।</div></details>
+      <details><summary>দলিল হারিয়ে গেলে কী করব?</summary><div>যে সাব-রেজিস্ট্রি অফিসে দলিল নিবন্ধিত হয়েছিল, সেখান থেকে সত্যায়িত নকল তোলা যায়। দলিল নম্বর ও সন জানা থাকলে কাজ সহজ হয়। হারানোর বিষয়টি থানায় জিডি করে রাখাও ভালো।</div></details>
+      <details><summary>খাজনা (ভূমি উন্নয়ন কর) কোথায় দেব?</summary><div>ইউনিয়ন ভূমি অফিসে বা অনলাইনে দেওয়া যায়। নামজারি হওয়া খতিয়ান থাকলে নিজের নামে দেবেন। রসিদ যত্নে রাখুন, কেনাবেচার সময় এটি লাগে।</div></details>
+    </div>
+
+    <h3 style="margin:48px 0 6px;font-size:1.5rem" id="links">কোথায় যাবেন, কী করবেন</h3>
+    <div class="offices" style="margin-top:14px">
+      <div class="card"><h3>ইউনিয়ন ভূমি অফিস</h3><p style="margin:0;color:var(--muted)">খাজনা দেওয়া, পর্চা তোলা, নামজারির আবেদনে সাহায্য।</p></div>
+      <div class="card"><h3>উপজেলা ভূমি অফিস</h3><p style="margin:0;color:var(--muted)">সহকারী কমিশনার (ভূমি) নামজারির শুনানি ও অনুমোদন দেন।</p></div>
+      <div class="card"><h3>সাব-রেজিস্ট্রি অফিস</h3><p style="margin:0;color:var(--muted)">দলিল নিবন্ধন ও দলিলের সত্যায়িত নকল।</p></div>
+      <div class="card"><h3>জেলা রেকর্ড রুম</h3><p style="margin:0;color:var(--muted)">সিএস, এসএ, আরএসের পুরনো খতিয়ান ও ম্যাপের নকল।</p></div>
+    </div>
+    <div class="links">
+      <a href="https://e-porcha.com/" target="_blank" rel="noopener">ই-পর্চা<small>eporcha.gov.bd</small></a>
+      <a href="https://mutation.land.gov.bd" target="_blank" rel="noopener">অনলাইন নামজারি<small>mutation.land.gov.bd</small></a>
+      <a href="https://land.gov.bd" target="_blank" rel="noopener">ভূমি মন্ত্রণালয়<small>land.gov.bd</small></a>
+      <a href="https://dlrms.land.gov.bd/" target="_blank" rel="noopener">ভূমি রেকর্ড ও জরিপ অধিদপ্তর<small>dlrs.gov.bd</small></a>
+    </div>
+  </div>
+</section>
 </main>
 
 <footer>
   <div class="wrap">
-    <span>© কারিগরপাড়া ভূমি সেবা তথ্যকেন্দ্র</span>
-    <span>তথ্য সাধারণ জ্ঞানের জন্য, সরকারি বিধি চূড়ান্ত।</span>
+    <div><b>কচুয়া কারিগরপাড়া ভূমি তথ্য</b><p style="margin-top:6px">গ্রামের মানুষের জন্য খতিয়ান, নামজারি, দলিল ও মৌজা ম্যাপের সহজ ব্যাখ্যা।</p></div>
+    <div><b>সতর্কতা</b><p style="margin-top:6px">এই সাইট সাধারণ ধারণা দেয়, আইনি পরামর্শ নয়। ফি, সময় ও নিয়ম বদলাতে পারে। সিদ্ধান্তের আগে সরকারি অফিস বা আইনজীবীর কাছে নিশ্চিত হন। ম্যাপের ছবি ঐতিহাসিক জরিপের স্ক্যান।</p></div>
   </div>
 </footer>
 
-<script>
-(function () {
-  var D = "০১২৩৪৫৬৭৮৯";
-  function bn(s) { return String(s).replace(/[0-9]/g, function (d) { return D[d]; }); }
-  // each unit in square feet
-  var SQFT = { decimal: 435.6, katha: 720, bigha: 14400, acre: 43560, hectare: 107639.1, sqft: 1, sqm: 10.7639 };
-  var NAME = { decimal: "শতাংশ", katha: "কাঠা", bigha: "বিঘা", acre: "একর", hectare: "হেক্টর", sqft: "বর্গফুট", sqm: "বর্গমিটার" };
-  var amt = document.getElementById("amount"), unit = document.getElementById("unit"), out = document.getElementById("results");
-  function fmt(n) {
-    var r = n >= 100 ? Math.round(n * 10) / 10 : Math.round(n * 1000) / 1000;
-    return bn(r.toLocaleString("en-US", { maximumFractionDigits: 3 }));
-  }
-  function render() {
-    var v = parseFloat(amt.value);
-    if (!isFinite(v) || v < 0) v = 0;
-    var base = v * SQFT[unit.value];
-    var html = "";
-    Object.keys(SQFT).forEach(function (k) {
-      html += '<div class="res' + (k === unit.value ? " on" : "") + '"><span>' + NAME[k] + "</span><b>" + fmt(base / SQFT[k]) + "</b></div>";
-    });
-    out.innerHTML = html;
-  }
-  amt.addEventListener("input", render);
-  unit.addEventListener("change", render);
-  render();
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="ম্যাপ বড় করে দেখুন">
+  <div class="lb-bar">
+    <b id="lbT"></b>
+    <button type="button" id="lbPrev" aria-label="আগের ম্যাপ">‹</button>
+    <button type="button" id="lbNext" aria-label="পরের ম্যাপ">›</button>
+    <button type="button" id="zOut" aria-label="ছোট করুন">−</button>
+    <button type="button" id="zIn" aria-label="বড় করুন">+</button>
+    <button type="button" id="lbClose">বন্ধ করুন</button>
+  </div>
+  <div class="lb-view" id="lbView"><img id="lbImg" alt="" src=""></div>
+</div>
 
-  var boxes = document.querySelectorAll("#checks input"), prog = document.getElementById("progress");
-  function upd() {
-    var n = 0; boxes.forEach(function (b) { if (b.checked) n++; });
-    prog.innerHTML = "যাচাই হয়েছে <b>" + bn(n) + "</b> / " + bn(boxes.length) + (n === boxes.length ? "। সব কাগজ যাচাই শেষ।" : "");
+<script>
+(function(){
+  var $=function(s,r){return (r||document).querySelector(s)};
+  var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+  var bn=function(n,d){try{return Number(n).toLocaleString('bn-BD',{maximumFractionDigits:d==null?3:d})}catch(e){return String(n)}};
+
+  /* theme */
+  var root=document.documentElement;
+  try{var st=localStorage.getItem('kk-theme');if(st)root.setAttribute('data-theme',st)}catch(e){}
+  $('#themeBtn').addEventListener('click',function(){
+    var cur=root.getAttribute('data-theme');
+    if(!cur)cur=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
+    var nx=cur==='dark'?'light':'dark';root.setAttribute('data-theme',nx);
+    try{localStorage.setItem('kk-theme',nx)}catch(e){}
+  });
+
+  /* menu */
+  var nav=$('#nav'),mb=$('#menuBtn');
+  mb.addEventListener('click',function(){var o=nav.classList.toggle('open');mb.setAttribute('aria-expanded',o)});
+  $$('#nav a').forEach(function(a){a.addEventListener('click',function(){nav.classList.remove('open');mb.setAttribute('aria-expanded','false')})});
+  var secs=['home','khatiyan','namjari','dolil','mouza-map','gallery','faq'];
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){
+      $$('#nav a').forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id)})}})},{rootMargin:'-40% 0px -55% 0px'});
+    secs.forEach(function(id){var el=document.getElementById(id);if(el)io.observe(el)});
   }
-  boxes.forEach(function (b) { b.addEventListener("change", upd); });
-  upd();
+
+  /* slider */
+  var slides=$$('.slide'),dots=$('#dots'),idx=0,timer=null,paused=false;
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  slides.forEach(function(s,i){var b=document.createElement('button');b.type='button';b.className='dot';b.setAttribute('aria-label','স্লাইড '+bn(i+1));
+    b.addEventListener('click',function(){go(i);restart()});dots.appendChild(b)});
+  function go(n){idx=(n+slides.length)%slides.length;
+    slides.forEach(function(s,i){s.classList.toggle('on',i===idx);s.setAttribute('aria-hidden',i===idx?'false':'true');
+      $$('a,button',s).forEach(function(x){x.tabIndex=i===idx?0:-1})});
+    $$('.dot').forEach(function(d,i){d.setAttribute('aria-current',i===idx?'true':'false')})}
+  function restart(){clearInterval(timer);if(!paused&&!reduce)timer=setInterval(function(){go(idx+1)},7000)}
+  $('#prev').addEventListener('click',function(){go(idx-1);restart()});
+  $('#next').addEventListener('click',function(){go(idx+1);restart()});
+  var pb=$('#pause');
+  if(reduce){paused=true}
+  function pauseUI(){pb.setAttribute('aria-pressed',paused);pb.setAttribute('aria-label',paused?'স্লাইড আবার চালু করুন':'স্লাইড চলা থামান');
+    $('#pauseIc').innerHTML=paused?'<path d="M7 4l13 8-13 8z"/>':'<path d="M6 4h4v16H6zM14 4h4v16h-4z"/>'}
+  pb.addEventListener('click',function(){paused=!paused;pauseUI();restart()});
+  $('.hero').addEventListener('mouseenter',function(){clearInterval(timer)});
+  $('.hero').addEventListener('mouseleave',restart);
+  $('.hero').addEventListener('focusin',function(){clearInterval(timer)});
+  pauseUI();go(0);restart();
+
+  /* timeline */
+  var ev=[{y:1912,t:'সিএস',s:'১৯১০-১৫, ম্যাপে লেখা',up:0},{y:1950,t:'এসএ আইন',s:'১৯৫০ সাল',up:1},{y:1971,t:'আরএস',s:'ম্যাপ ১৯৬৬-৭৭',up:0},{y:2008,t:'বিএস',s:'২০০০-এর দশক থেকে',up:1}];
+  var ax=$('#axis'),y0=1900,y1=2026;
+  ev.forEach(function(e){var d=document.createElement('div');d.className='mk'+(e.up?' up':'');
+    d.style.left=((e.y-y0)/(y1-y0)*100)+'%';
+    d.innerHTML='<div class="pin"></div><div class="lbl"><b>'+e.t+'</b><span>'+e.s+'</span></div>';
+    ax.appendChild(d)});
+
+  /* tabs */
+  var tabs=$$('.tab');
+  tabs.forEach(function(t){t.addEventListener('click',function(){
+    tabs.forEach(function(x){var on=x===t;x.setAttribute('aria-selected',on);$('#'+x.getAttribute('aria-controls')).hidden=!on})})});
+
+  /* checklist */
+  var cks=$$('#chkList input');
+  function upd(){var n=cks.filter(function(c){return c.checked}).length;
+    $('#ring').style.setProperty('--p',n/cks.length*100);$('#ringN').textContent=bn(n)+'/'+bn(cks.length);
+    $('#ring').setAttribute('aria-label','যাচাই অগ্রগতি: '+bn(n)+' টি, মোট '+bn(cks.length)+' টির মধ্যে')}
+  cks.forEach(function(c){c.addEventListener('change',upd)});upd();
+
+  /* map explorer */
+  var hs=[
+    {n:1,l:'শিরোনাম',x:24,y:15,w:22,h:7,t:'ম্যাপের শিরোনাম',d:'এখানে জেলা, থানা, মৌজার নাম (কচুয়া), জে.এল. নং ১২৩ আর সিট নং ১ লেখা। নিজের জমি কোন কাগজে আছে, আগে এখান থেকে বুঝে নিন।'},
+    {n:2,l:'স্কেল',x:27,y:26.5,w:12,h:3.5,t:'স্কেল ও জরীপ-দণ্ড',d:'এই দণ্ড দিয়ে ম্যাপের দূরত্ব মাঠের দূরত্বে বদলানো হয়। স্কেল ১৬ ইঞ্চি = ১ মাইল।'},
+    {n:3,l:'সাংকেতিক',x:15,y:37.5,w:17,h:21.5,t:'সাংকেতিক চিহ্নের বাক্স',d:'দালান, পিলার, ট্রাভার্স স্টেশন, নলকূপ, পাকা ও কাঁচা সড়ক, খাল ইত্যাদি ম্যাপে কোন চিহ্নে আঁকা, এই বাক্সে দেওয়া আছে। পাশে এই সিটের রাস্তা-দাগের নম্বরও লেখা।'},
+    {n:4,l:'মৌজা সারণি',x:5,y:59.5,w:31,h:7.5,t:'পুরনো ও নতুন জে.এল. সারণি',d:'পাশের মৌজাগুলোর পুরনো আর নতুন জে.এল. নম্বর। যেমন কচুয়া ৯০ থেকে ১২৩। পুরনো দলিলে পুরনো নম্বর পেলে এখান থেকে নতুন নম্বর খুঁজে নিন।'},
+    {n:5,l:'ম্যাপের জমি',x:30,y:27,w:45,h:64,t:'মৌজার জমি, দাগে দাগে',d:'কালো রেখা মানে দাগের সীমানা। প্রতিটি ঘরের ভেতরের বড় নম্বর দাগ নম্বর। এই নম্বর নিয়ে খতিয়ান খুললে মালিকের নাম পাবেন।'},
+    {n:6,l:'পাশের মৌজা',x:75,y:56.5,w:17,h:3.5,t:'পাশের মৌজার নাম',d:'ম্যাপের কিনারায় লেখা অর্জুনপাড়া নং ১২৪। মানে এই দিকে অর্জুনপাড়া মৌজা। সুন্দরগাড়া, নওদাপাড়া, আড়বাব, চিকাদহ আর ছোট সেরপাড়া মৌজাও এভাবে লেখা।'},
+    {n:7,l:'সিলমোহর',x:77.5,y:79,w:19,h:6,t:'সিলমোহর',d:'জরিপ কর্মকর্তার সিল। এখানে লেখা, ১৯৫০ সালের আইনের চতুর্থ অধ্যায় অনুযায়ী কাজের জন্য ম্যাপটি সংশোধন ছাড়া গৃহীত।'},
+    {n:8,l:'স্বাক্ষর বাক্স',x:35.5,y:91,w:25,h:4.5,t:'প্রস্তুতকারীর বাক্স',d:'এখানে লেখা, সরকারের দেওয়া ক্ষমতায় ১৯৬৬-৭৭ সনে প্রস্তুত। নিচে সেটেলমেন্ট অফিসার ও সুপারিনটেনডেন্ট অব সার্ভের স্বাক্ষর।'}
+  ];
+  var mb2=$('#mapbox'),picks=$('#picks'),info=$('#info');
+  function sel(n){hs.forEach(function(h){
+    $('#hs'+h.n).classList.toggle('on',h.n===n);
+    $('#pk'+h.n).setAttribute('aria-pressed',h.n===n);
+    if(h.n===n)info.innerHTML='<div class="tag" style="margin-bottom:8px">অংশ '+bn(h.n)+'</div><h3>'+h.t+'</h3><p style="margin:0">'+h.d+'</p>'})}
+  hs.forEach(function(h){
+    var b=document.createElement('button');b.type='button';b.className='hs';b.id='hs'+h.n;
+    b.style.cssText='left:'+h.x+'%;top:'+h.y+'%;width:'+h.w+'%;height:'+h.h+'%';
+    b.setAttribute('aria-label',h.t);b.innerHTML='<span>'+bn(h.n)+'</span>';
+    b.addEventListener('click',function(){sel(h.n)});mb2.appendChild(b);
+    var li=document.createElement('li');
+    li.innerHTML='<button type="button" id="pk'+h.n+'" aria-pressed="false"><span class="cal">'+bn(h.n)+'</span>'+h.l+'</button>';
+    li.firstChild.addEventListener('click',function(){sel(h.n)});picks.appendChild(li)});
+  sel(1);
+
+  /* legend */
+  var sv=function(p){return '<svg viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">'+p+'</svg>'};
+  var lg=[['দালান',sv('<rect x="4" y="9" width="22" height="12" fill="currentColor" fill-opacity=".25"/><path d="M6 21L14 9M11 21l8-12M16 21l8-12M21 21l5-8M4 17l6-8"/>')],
+    ['ত্রিসীমানার পিলার',sv('<path d="M15 6l9 17H6z"/>')],
+    ['অন্যান্য পিলার',sv('<rect x="8" y="8" width="14" height="14"/><circle cx="15" cy="15" r="1.5" fill="currentColor"/>')],
+    ['লোহার পিলার',sv('<path d="M15 5v21M9 11h12"/>')],
+    ['ট্রাভার্স স্টেশন',sv('<circle cx="15" cy="15" r="9"/><circle cx="15" cy="15" r="1.6" fill="currentColor"/>')],
+    ['জি.টি. স্টেশন',sv('<path d="M15 5l11 19H4z"/><path d="M15 12l5 9h-10z"/>')],
+    ['পাকা ইন্দারা',sv('<circle cx="15" cy="15" r="10"/><circle cx="15" cy="15" r="5"/>')],
+    ['নলকূপ',sv('<circle cx="15" cy="15" r="10"/><path d="M15 5v20M5 15h20"/>')],
+    ['পান বরজ',sv('<rect x="4" y="9" width="22" height="12" fill="currentColor" fill-opacity=".8"/><path d="M8 15h14" stroke="#fff"/>')]];
+  $('#legend').innerHTML=lg.map(function(x){return '<div>'+x[1]+'<span>'+x[0]+'</span></div>'}).join('');
+
+  /* converter */
+  function conv(){var v=parseFloat($('#cv').value),u=parseFloat($('#cu').value),o=$('#out');
+    if(isNaN(v)||v<0){o.innerHTML='';return}
+    var sf=v*u;
+    var rows=[['শতাংশ',sf/435.6],['একর',sf/43560],['বিঘা (৩৩ শতাংশ)',sf/14374.8],['কাঠা (৭২০ বর্গফুট)',sf/720],['বর্গফুট',sf],['হেক্টর',sf/107639.1]];
+    o.innerHTML=rows.map(function(r){return '<div><small>'+r[0]+'</small><b>'+bn(r[1],4)+'</b></div>'}).join('')}
+  $('#cv').addEventListener('input',conv);$('#cu').addEventListener('change',conv);conv();
+
+  /* gallery */
+  var G=[
+    ['kachua-seat-1','কচুয়া মৌজা, সিট নং ১','জে.এল. ১২৩, লালপুর'],
+    ['kachua-seat-2','কচুয়া মৌজা, সিট নং ২','জে.এল. ১২৩, লালপুর'],
+    ['arjunpara-seat-1','অর্জুনপাড়া মৌজা, সিট নং ১','জে.এল. ১২৪, লালপুর'],
+    ['arjunpara-seat-2','অর্জুনপাড়া মৌজা, সিট নং ২','জে.এল. ১২৪, লালপুর'],
+    ['arjunpara-seat-3','অর্জুনপাড়া মৌজা, সিট নং ৩','জে.এল. ১২৪, লালপুর'],
+    ['andi','আন্দি মৌজা','জে.এল. ৭২, লালপুর']];
+  var gal=$('#gal');
+  G.forEach(function(g,i){var b=document.createElement('button');b.type='button';b.className='gi';
+    b.innerHTML='<div class="th"><img src="img/'+g[0]+'-thumb.jpg" alt="'+g[1]+' ম্যাপ" loading="lazy"></div><div class="t"><b>'+g[1]+'</b><small>'+g[2]+' · বড় করে দেখুন</small></div>';
+    b.addEventListener('click',function(){openLb(i)});gal.appendChild(b)});
+  var lb=$('#lb'),li=$('#lbImg'),cur=0,zoom=1,opener=null;
+  function show(i){cur=(i+G.length)%G.length;zoom=1;li.src='img/'+G[cur][0]+'-full.jpg';li.alt=G[cur][1]+' ম্যাপ';
+    $('#lbT').textContent=G[cur][1]+' ('+G[cur][2]+')';z()}
+  function z(){li.style.width=(zoom*100)+'%';if(zoom===1)$('#lbView').scrollTo(0,0)}
+  function openLb(i){opener=document.activeElement;show(i);lb.classList.add('open');document.body.style.overflow='hidden';$('#lbClose').focus()}
+  function closeLb(){lb.classList.remove('open');document.body.style.overflow='';if(opener)opener.focus()}
+  $('#lbClose').addEventListener('click',closeLb);
+  $('#lbPrev').addEventListener('click',function(){show(cur-1)});
+  $('#lbNext').addEventListener('click',function(){show(cur+1)});
+  $('#zIn').addEventListener('click',function(){zoom=Math.min(4,zoom+.5);z()});
+  $('#zOut').addEventListener('click',function(){zoom=Math.max(1,zoom-.5);z()});
+  document.addEventListener('keydown',function(e){if(!lb.classList.contains('open'))return;
+    if(e.key==='Escape')closeLb();if(e.key==='ArrowRight')show(cur+1);if(e.key==='ArrowLeft')show(cur-1)});
 })();
 </script>
 
